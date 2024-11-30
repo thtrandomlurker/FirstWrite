@@ -79,17 +79,18 @@ namespace FirstWrite
             // Items
             // 
             this.Items.FormattingEnabled = true;
-            this.Items.Location = new System.Drawing.Point(12, 13);
+            this.Items.ItemHeight = 12;
+            this.Items.Location = new System.Drawing.Point(12, 12);
             this.Items.Name = "Items";
-            this.Items.Size = new System.Drawing.Size(87, 277);
+            this.Items.Size = new System.Drawing.Size(87, 256);
             this.Items.TabIndex = 0;
             this.Items.SelectedIndexChanged += new System.EventHandler(this.Items_SelectedIndexChanged);
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(12, 296);
+            this.AddButton.Location = new System.Drawing.Point(12, 273);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(87, 23);
+            this.AddButton.Size = new System.Drawing.Size(87, 21);
             this.AddButton.TabIndex = 1;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -97,9 +98,9 @@ namespace FirstWrite
             // 
             // RemoveButton
             // 
-            this.RemoveButton.Location = new System.Drawing.Point(12, 325);
+            this.RemoveButton.Location = new System.Drawing.Point(12, 300);
             this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(87, 23);
+            this.RemoveButton.Size = new System.Drawing.Size(87, 21);
             this.RemoveButton.TabIndex = 2;
             this.RemoveButton.Text = "Remove";
             this.RemoveButton.UseVisualStyleBackColor = true;
@@ -107,69 +108,73 @@ namespace FirstWrite
             // 
             // ItemNumber
             // 
-            this.ItemNumber.Location = new System.Drawing.Point(106, 29);
-            this.ItemNumber.MaxLength = 3;
+            this.ItemNumber.Location = new System.Drawing.Point(106, 27);
+            this.ItemNumber.MaxLength = 5;
             this.ItemNumber.Name = "ItemNumber";
-            this.ItemNumber.Size = new System.Drawing.Size(31, 20);
+            this.ItemNumber.Size = new System.Drawing.Size(31, 19);
             this.ItemNumber.TabIndex = 3;
+            this.ItemNumber.TextChanged += new System.EventHandler(this.ItemNumber_TextChanged);
             // 
             // ItemNumberLabel
             // 
             this.ItemNumberLabel.AutoSize = true;
-            this.ItemNumberLabel.Location = new System.Drawing.Point(103, 13);
+            this.ItemNumberLabel.Location = new System.Drawing.Point(103, 12);
             this.ItemNumberLabel.Name = "ItemNumberLabel";
-            this.ItemNumberLabel.Size = new System.Drawing.Size(105, 13);
+            this.ItemNumberLabel.Size = new System.Drawing.Size(110, 12);
             this.ItemNumberLabel.TabIndex = 4;
             this.ItemNumberLabel.Text = "Num:    U06:     U07:";
             // 
             // U09
             // 
-            this.U09.Location = new System.Drawing.Point(143, 68);
+            this.U09.Location = new System.Drawing.Point(143, 63);
             this.U09.MaxLength = 3;
             this.U09.Name = "U09";
-            this.U09.Size = new System.Drawing.Size(31, 20);
+            this.U09.Size = new System.Drawing.Size(31, 19);
             this.U09.TabIndex = 6;
+            this.U09.TextChanged += new System.EventHandler(this.U09_TextChanged);
             // 
             // Attribute
             // 
-            this.Attribute.Location = new System.Drawing.Point(161, 110);
+            this.Attribute.Location = new System.Drawing.Point(161, 102);
             this.Attribute.MaxLength = 5;
             this.Attribute.Name = "Attribute";
-            this.Attribute.Size = new System.Drawing.Size(49, 20);
+            this.Attribute.Size = new System.Drawing.Size(49, 19);
             this.Attribute.TabIndex = 8;
+            this.Attribute.TextChanged += new System.EventHandler(this.Attribute_TextChanged);
             // 
             // AttributeLabel
             // 
             this.AttributeLabel.AutoSize = true;
-            this.AttributeLabel.Location = new System.Drawing.Point(161, 94);
+            this.AttributeLabel.Location = new System.Drawing.Point(161, 87);
             this.AttributeLabel.Name = "AttributeLabel";
-            this.AttributeLabel.Size = new System.Drawing.Size(49, 13);
+            this.AttributeLabel.Size = new System.Drawing.Size(52, 12);
             this.AttributeLabel.TabIndex = 7;
             this.AttributeLabel.Text = "Attribute:";
             // 
             // DestID
             // 
-            this.DestID.Location = new System.Drawing.Point(106, 149);
+            this.DestID.Location = new System.Drawing.Point(106, 138);
             this.DestID.MaxLength = 3;
             this.DestID.Name = "DestID";
-            this.DestID.Size = new System.Drawing.Size(105, 20);
+            this.DestID.Size = new System.Drawing.Size(105, 19);
             this.DestID.TabIndex = 10;
+            this.DestID.TextChanged += new System.EventHandler(this.DestID_TextChanged);
             // 
             // DestIDLabel
             // 
             this.DestIDLabel.AutoSize = true;
-            this.DestIDLabel.Location = new System.Drawing.Point(106, 133);
+            this.DestIDLabel.Location = new System.Drawing.Point(106, 123);
             this.DestIDLabel.Name = "DestIDLabel";
-            this.DestIDLabel.Size = new System.Drawing.Size(46, 13);
+            this.DestIDLabel.Size = new System.Drawing.Size(46, 12);
             this.DestIDLabel.TabIndex = 9;
             this.DestIDLabel.Text = "Dest ID:";
             // 
             // SubIDLabel
             // 
             this.SubIDLabel.AutoSize = true;
-            this.SubIDLabel.Location = new System.Drawing.Point(105, 253);
+            this.SubIDLabel.Location = new System.Drawing.Point(105, 234);
             this.SubIDLabel.Name = "SubIDLabel";
-            this.SubIDLabel.Size = new System.Drawing.Size(43, 13);
+            this.SubIDLabel.Size = new System.Drawing.Size(41, 12);
             this.SubIDLabel.TabIndex = 11;
             this.SubIDLabel.Text = "Sub ID:";
             // 
@@ -203,247 +208,263 @@ namespace FirstWrite
             "ITEM22",
             "ITEM23",
             "ATAM_HEAD"});
-            this.SubID.Location = new System.Drawing.Point(106, 269);
+            this.SubID.Location = new System.Drawing.Point(106, 248);
             this.SubID.Name = "SubID";
-            this.SubID.Size = new System.Drawing.Size(105, 21);
+            this.SubID.Size = new System.Drawing.Size(105, 20);
             this.SubID.TabIndex = 12;
+            this.SubID.SelectedIndexChanged += new System.EventHandler(this.SubID_SelectedIndexChanged);
             // 
             // U04Label
             // 
             this.U04Label.AutoSize = true;
-            this.U04Label.Location = new System.Drawing.Point(103, 94);
+            this.U04Label.Location = new System.Drawing.Point(103, 87);
             this.U04Label.Name = "U04Label";
-            this.U04Label.Size = new System.Drawing.Size(30, 13);
+            this.U04Label.Size = new System.Drawing.Size(27, 12);
             this.U04Label.TabIndex = 14;
             this.U04Label.Text = "U04:";
             // 
             // U04
             // 
-            this.U04.Location = new System.Drawing.Point(106, 110);
+            this.U04.Location = new System.Drawing.Point(106, 102);
             this.U04.MaxLength = 5;
             this.U04.Name = "U04";
-            this.U04.Size = new System.Drawing.Size(49, 20);
+            this.U04.Size = new System.Drawing.Size(49, 19);
             this.U04.TabIndex = 13;
+            this.U04.TextChanged += new System.EventHandler(this.U04_TextChanged);
             // 
             // U06
             // 
-            this.U06.Location = new System.Drawing.Point(143, 29);
+            this.U06.Location = new System.Drawing.Point(143, 27);
             this.U06.MaxLength = 3;
             this.U06.Name = "U06";
-            this.U06.Size = new System.Drawing.Size(31, 20);
+            this.U06.Size = new System.Drawing.Size(31, 19);
             this.U06.TabIndex = 15;
+            this.U06.TextChanged += new System.EventHandler(this.U06_TextChanged);
             // 
             // U07
             // 
-            this.U07.Location = new System.Drawing.Point(180, 29);
+            this.U07.Location = new System.Drawing.Point(180, 27);
             this.U07.MaxLength = 3;
             this.U07.Name = "U07";
-            this.U07.Size = new System.Drawing.Size(31, 20);
+            this.U07.Size = new System.Drawing.Size(31, 19);
             this.U07.TabIndex = 16;
+            this.U07.TextChanged += new System.EventHandler(this.U07_TextChanged);
             // 
             // Type
             // 
-            this.Type.Location = new System.Drawing.Point(106, 68);
+            this.Type.Location = new System.Drawing.Point(106, 63);
             this.Type.MaxLength = 3;
             this.Type.Name = "Type";
-            this.Type.Size = new System.Drawing.Size(31, 20);
+            this.Type.Size = new System.Drawing.Size(31, 19);
             this.Type.TabIndex = 17;
+            this.Type.TextChanged += new System.EventHandler(this.Type_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(103, 52);
+            this.label1.Location = new System.Drawing.Point(103, 48);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 13);
+            this.label1.Size = new System.Drawing.Size(109, 12);
             this.label1.TabIndex = 18;
             this.label1.Text = "Type:    U09:    U0F:";
             // 
             // U0F
             // 
-            this.U0F.Location = new System.Drawing.Point(180, 66);
+            this.U0F.Location = new System.Drawing.Point(180, 61);
             this.U0F.MaxLength = 3;
             this.U0F.Name = "U0F";
-            this.U0F.Size = new System.Drawing.Size(31, 20);
+            this.U0F.Size = new System.Drawing.Size(31, 19);
             this.U0F.TabIndex = 19;
+            this.U0F.TextChanged += new System.EventHandler(this.U0F_TextChanged);
             // 
             // U10
             // 
-            this.U10.Location = new System.Drawing.Point(106, 188);
+            this.U10.Location = new System.Drawing.Point(106, 174);
             this.U10.MaxLength = 3;
             this.U10.Name = "U10";
-            this.U10.Size = new System.Drawing.Size(105, 20);
+            this.U10.Size = new System.Drawing.Size(105, 19);
             this.U10.TabIndex = 21;
+            this.U10.TextChanged += new System.EventHandler(this.U10_TextChanged);
             // 
             // U10Label
             // 
             this.U10Label.AutoSize = true;
-            this.U10Label.Location = new System.Drawing.Point(106, 172);
+            this.U10Label.Location = new System.Drawing.Point(106, 159);
             this.U10Label.Name = "U10Label";
-            this.U10Label.Size = new System.Drawing.Size(30, 13);
+            this.U10Label.Size = new System.Drawing.Size(27, 12);
             this.U10Label.TabIndex = 20;
             this.U10Label.Text = "U10:";
             // 
             // U14
             // 
-            this.U14.Location = new System.Drawing.Point(106, 227);
+            this.U14.Location = new System.Drawing.Point(106, 210);
             this.U14.MaxLength = 3;
             this.U14.Name = "U14";
-            this.U14.Size = new System.Drawing.Size(105, 20);
+            this.U14.Size = new System.Drawing.Size(105, 19);
             this.U14.TabIndex = 23;
+            this.U14.TextChanged += new System.EventHandler(this.U14_TextChanged);
             // 
             // U14Label
             // 
             this.U14Label.AutoSize = true;
-            this.U14Label.Location = new System.Drawing.Point(106, 211);
+            this.U14Label.Location = new System.Drawing.Point(106, 195);
             this.U14Label.Name = "U14Label";
-            this.U14Label.Size = new System.Drawing.Size(30, 13);
+            this.U14Label.Size = new System.Drawing.Size(27, 12);
             this.U14Label.TabIndex = 22;
             this.U14Label.Text = "U14:";
             // 
             // Objects
             // 
             this.Objects.FormattingEnabled = true;
-            this.Objects.Location = new System.Drawing.Point(218, 29);
+            this.Objects.ItemHeight = 12;
+            this.Objects.Location = new System.Drawing.Point(218, 27);
             this.Objects.Name = "Objects";
-            this.Objects.Size = new System.Drawing.Size(105, 30);
+            this.Objects.Size = new System.Drawing.Size(105, 28);
             this.Objects.TabIndex = 24;
             this.Objects.SelectedIndexChanged += new System.EventHandler(this.Objects_SelectedIndexChanged);
             // 
             // ObjectsListLabel
             // 
             this.ObjectsListLabel.AutoSize = true;
-            this.ObjectsListLabel.Location = new System.Drawing.Point(215, 13);
+            this.ObjectsListLabel.Location = new System.Drawing.Point(215, 12);
             this.ObjectsListLabel.Name = "ObjectsListLabel";
-            this.ObjectsListLabel.Size = new System.Drawing.Size(46, 13);
+            this.ObjectsListLabel.Size = new System.Drawing.Size(46, 12);
             this.ObjectsListLabel.TabIndex = 25;
             this.ObjectsListLabel.Text = "Objects:";
             // 
             // TextureChanges
             // 
             this.TextureChanges.FormattingEnabled = true;
-            this.TextureChanges.Location = new System.Drawing.Point(218, 132);
+            this.TextureChanges.ItemHeight = 12;
+            this.TextureChanges.Location = new System.Drawing.Point(218, 122);
             this.TextureChanges.Name = "TextureChanges";
-            this.TextureChanges.Size = new System.Drawing.Size(105, 30);
+            this.TextureChanges.Size = new System.Drawing.Size(105, 28);
             this.TextureChanges.TabIndex = 26;
             this.TextureChanges.SelectedIndexChanged += new System.EventHandler(this.TextureChanges_SelectedIndexChanged);
             // 
             // ObjectSets
             // 
             this.ObjectSets.FormattingEnabled = true;
-            this.ObjectSets.Location = new System.Drawing.Point(218, 234);
+            this.ObjectSets.ItemHeight = 12;
+            this.ObjectSets.Location = new System.Drawing.Point(218, 216);
             this.ObjectSets.Name = "ObjectSets";
-            this.ObjectSets.Size = new System.Drawing.Size(105, 30);
+            this.ObjectSets.Size = new System.Drawing.Size(105, 28);
             this.ObjectSets.TabIndex = 27;
             this.ObjectSets.SelectedIndexChanged += new System.EventHandler(this.ObjectSets_SelectedIndexChanged);
             // 
             // TextureChangeLabel
             // 
             this.TextureChangeLabel.AutoSize = true;
-            this.TextureChangeLabel.Location = new System.Drawing.Point(216, 117);
+            this.TextureChangeLabel.Location = new System.Drawing.Point(216, 108);
             this.TextureChangeLabel.Name = "TextureChangeLabel";
-            this.TextureChangeLabel.Size = new System.Drawing.Size(91, 13);
+            this.TextureChangeLabel.Size = new System.Drawing.Size(94, 12);
             this.TextureChangeLabel.TabIndex = 28;
             this.TextureChangeLabel.Text = "Texture Changes:";
             // 
             // ObjectSetsLabel
             // 
             this.ObjectSetsLabel.AutoSize = true;
-            this.ObjectSetsLabel.Location = new System.Drawing.Point(218, 218);
+            this.ObjectSetsLabel.Location = new System.Drawing.Point(218, 201);
             this.ObjectSetsLabel.Name = "ObjectSetsLabel";
-            this.ObjectSetsLabel.Size = new System.Drawing.Size(65, 13);
+            this.ObjectSetsLabel.Size = new System.Drawing.Size(67, 12);
             this.ObjectSetsLabel.TabIndex = 29;
             this.ObjectSetsLabel.Text = "Object Sets:";
             // 
             // ObjectIDLabel
             // 
             this.ObjectIDLabel.AutoSize = true;
-            this.ObjectIDLabel.Location = new System.Drawing.Point(329, 13);
+            this.ObjectIDLabel.Location = new System.Drawing.Point(329, 12);
             this.ObjectIDLabel.Name = "ObjectIDLabel";
-            this.ObjectIDLabel.Size = new System.Drawing.Size(55, 13);
+            this.ObjectIDLabel.Size = new System.Drawing.Size(55, 12);
             this.ObjectIDLabel.TabIndex = 30;
             this.ObjectIDLabel.Text = "Object ID:";
             // 
             // ObjectID
             // 
-            this.ObjectID.Location = new System.Drawing.Point(330, 30);
+            this.ObjectID.Location = new System.Drawing.Point(330, 28);
             this.ObjectID.MaxLength = 10;
             this.ObjectID.Name = "ObjectID";
-            this.ObjectID.Size = new System.Drawing.Size(100, 20);
+            this.ObjectID.Size = new System.Drawing.Size(100, 19);
             this.ObjectID.TabIndex = 31;
+            this.ObjectID.TextChanged += new System.EventHandler(this.ObjectID_TextChanged);
             // 
             // ObjectRPKLabel
             // 
             this.ObjectRPKLabel.AutoSize = true;
-            this.ObjectRPKLabel.Location = new System.Drawing.Point(329, 52);
+            this.ObjectRPKLabel.Location = new System.Drawing.Point(329, 48);
             this.ObjectRPKLabel.Name = "ObjectRPKLabel";
-            this.ObjectRPKLabel.Size = new System.Drawing.Size(32, 13);
+            this.ObjectRPKLabel.Size = new System.Drawing.Size(29, 12);
             this.ObjectRPKLabel.TabIndex = 32;
             this.ObjectRPKLabel.Text = "RPK:";
             // 
             // RPK
             // 
-            this.RPK.Location = new System.Drawing.Point(332, 68);
+            this.RPK.Location = new System.Drawing.Point(332, 63);
             this.RPK.MaxLength = 3;
             this.RPK.Name = "RPK";
-            this.RPK.Size = new System.Drawing.Size(31, 20);
+            this.RPK.Size = new System.Drawing.Size(31, 19);
             this.RPK.TabIndex = 33;
+            this.RPK.TextChanged += new System.EventHandler(this.RPK_TextChanged);
             // 
             // TexChangeSrc
             // 
-            this.TexChangeSrc.Location = new System.Drawing.Point(326, 134);
+            this.TexChangeSrc.Location = new System.Drawing.Point(326, 124);
             this.TexChangeSrc.MaxLength = 10;
             this.TexChangeSrc.Name = "TexChangeSrc";
-            this.TexChangeSrc.Size = new System.Drawing.Size(100, 20);
+            this.TexChangeSrc.Size = new System.Drawing.Size(100, 19);
             this.TexChangeSrc.TabIndex = 35;
+            this.TexChangeSrc.TextChanged += new System.EventHandler(this.TexChangeSrc_TextChanged);
             // 
             // SourceTexLabel
             // 
             this.SourceTexLabel.AutoSize = true;
-            this.SourceTexLabel.Location = new System.Drawing.Point(325, 117);
+            this.SourceTexLabel.Location = new System.Drawing.Point(325, 108);
             this.SourceTexLabel.Name = "SourceTexLabel";
-            this.SourceTexLabel.Size = new System.Drawing.Size(58, 13);
+            this.SourceTexLabel.Size = new System.Drawing.Size(57, 12);
             this.SourceTexLabel.TabIndex = 34;
             this.SourceTexLabel.Text = "Source ID:";
             // 
             // TexChangeDst
             // 
-            this.TexChangeDst.Location = new System.Drawing.Point(326, 174);
+            this.TexChangeDst.Location = new System.Drawing.Point(326, 161);
             this.TexChangeDst.MaxLength = 10;
             this.TexChangeDst.Name = "TexChangeDst";
-            this.TexChangeDst.Size = new System.Drawing.Size(100, 20);
+            this.TexChangeDst.Size = new System.Drawing.Size(100, 19);
             this.TexChangeDst.TabIndex = 37;
+            this.TexChangeDst.TextChanged += new System.EventHandler(this.TexChangeDst_TextChanged);
             // 
             // ReplaceTexLabel
             // 
             this.ReplaceTexLabel.AutoSize = true;
-            this.ReplaceTexLabel.Location = new System.Drawing.Point(325, 157);
+            this.ReplaceTexLabel.Location = new System.Drawing.Point(325, 145);
             this.ReplaceTexLabel.Name = "ReplaceTexLabel";
-            this.ReplaceTexLabel.Size = new System.Drawing.Size(87, 13);
+            this.ReplaceTexLabel.Size = new System.Drawing.Size(88, 12);
             this.ReplaceTexLabel.TabIndex = 36;
             this.ReplaceTexLabel.Text = "Replacement ID:";
             // 
             // ObjectSetID
             // 
-            this.ObjectSetID.Location = new System.Drawing.Point(328, 235);
+            this.ObjectSetID.Location = new System.Drawing.Point(328, 217);
             this.ObjectSetID.MaxLength = 10;
             this.ObjectSetID.Name = "ObjectSetID";
-            this.ObjectSetID.Size = new System.Drawing.Size(100, 20);
+            this.ObjectSetID.Size = new System.Drawing.Size(100, 19);
             this.ObjectSetID.TabIndex = 39;
+            this.ObjectSetID.TextChanged += new System.EventHandler(this.ObjectSetID_TextChanged);
             // 
             // ObjectSetIDLabel
             // 
             this.ObjectSetIDLabel.AutoSize = true;
-            this.ObjectSetIDLabel.Location = new System.Drawing.Point(327, 218);
+            this.ObjectSetIDLabel.Location = new System.Drawing.Point(327, 201);
             this.ObjectSetIDLabel.Name = "ObjectSetIDLabel";
-            this.ObjectSetIDLabel.Size = new System.Drawing.Size(74, 13);
+            this.ObjectSetIDLabel.Size = new System.Drawing.Size(76, 12);
             this.ObjectSetIDLabel.TabIndex = 38;
             this.ObjectSetIDLabel.Text = "Object Set ID:";
             // 
             // AddObjectButton
             // 
-            this.AddObjectButton.Location = new System.Drawing.Point(217, 65);
+            this.AddObjectButton.Location = new System.Drawing.Point(217, 60);
             this.AddObjectButton.Name = "AddObjectButton";
-            this.AddObjectButton.Size = new System.Drawing.Size(106, 23);
+            this.AddObjectButton.Size = new System.Drawing.Size(106, 21);
             this.AddObjectButton.TabIndex = 40;
             this.AddObjectButton.Text = "Add";
             this.AddObjectButton.UseVisualStyleBackColor = true;
@@ -451,9 +472,9 @@ namespace FirstWrite
             // 
             // RemoveObjectButton
             // 
-            this.RemoveObjectButton.Location = new System.Drawing.Point(218, 89);
+            this.RemoveObjectButton.Location = new System.Drawing.Point(218, 82);
             this.RemoveObjectButton.Name = "RemoveObjectButton";
-            this.RemoveObjectButton.Size = new System.Drawing.Size(105, 23);
+            this.RemoveObjectButton.Size = new System.Drawing.Size(105, 21);
             this.RemoveObjectButton.TabIndex = 41;
             this.RemoveObjectButton.Text = "Remove";
             this.RemoveObjectButton.UseVisualStyleBackColor = true;
@@ -461,9 +482,9 @@ namespace FirstWrite
             // 
             // RemoveTextureChangeButton
             // 
-            this.RemoveTextureChangeButton.Location = new System.Drawing.Point(218, 192);
+            this.RemoveTextureChangeButton.Location = new System.Drawing.Point(218, 177);
             this.RemoveTextureChangeButton.Name = "RemoveTextureChangeButton";
-            this.RemoveTextureChangeButton.Size = new System.Drawing.Size(105, 23);
+            this.RemoveTextureChangeButton.Size = new System.Drawing.Size(105, 21);
             this.RemoveTextureChangeButton.TabIndex = 43;
             this.RemoveTextureChangeButton.Text = "Remove";
             this.RemoveTextureChangeButton.UseVisualStyleBackColor = true;
@@ -471,9 +492,9 @@ namespace FirstWrite
             // 
             // AddTextureChangeButton
             // 
-            this.AddTextureChangeButton.Location = new System.Drawing.Point(217, 168);
+            this.AddTextureChangeButton.Location = new System.Drawing.Point(217, 155);
             this.AddTextureChangeButton.Name = "AddTextureChangeButton";
-            this.AddTextureChangeButton.Size = new System.Drawing.Size(106, 23);
+            this.AddTextureChangeButton.Size = new System.Drawing.Size(106, 21);
             this.AddTextureChangeButton.TabIndex = 42;
             this.AddTextureChangeButton.Text = "Add";
             this.AddTextureChangeButton.UseVisualStyleBackColor = true;
@@ -481,9 +502,9 @@ namespace FirstWrite
             // 
             // RemoveObjectSetsButton
             // 
-            this.RemoveObjectSetsButton.Location = new System.Drawing.Point(219, 290);
+            this.RemoveObjectSetsButton.Location = new System.Drawing.Point(219, 268);
             this.RemoveObjectSetsButton.Name = "RemoveObjectSetsButton";
-            this.RemoveObjectSetsButton.Size = new System.Drawing.Size(105, 23);
+            this.RemoveObjectSetsButton.Size = new System.Drawing.Size(105, 21);
             this.RemoveObjectSetsButton.TabIndex = 45;
             this.RemoveObjectSetsButton.Text = "Remove";
             this.RemoveObjectSetsButton.UseVisualStyleBackColor = true;
@@ -491,9 +512,9 @@ namespace FirstWrite
             // 
             // AddObjectSetButton
             // 
-            this.AddObjectSetButton.Location = new System.Drawing.Point(218, 266);
+            this.AddObjectSetButton.Location = new System.Drawing.Point(218, 246);
             this.AddObjectSetButton.Name = "AddObjectSetButton";
-            this.AddObjectSetButton.Size = new System.Drawing.Size(106, 23);
+            this.AddObjectSetButton.Size = new System.Drawing.Size(106, 21);
             this.AddObjectSetButton.TabIndex = 44;
             this.AddObjectSetButton.Text = "Add";
             this.AddObjectSetButton.UseVisualStyleBackColor = true;
@@ -501,9 +522,9 @@ namespace FirstWrite
             // 
             // ItemEditorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 351);
+            this.ClientSize = new System.Drawing.Size(437, 324);
             this.Controls.Add(this.RemoveObjectSetsButton);
             this.Controls.Add(this.AddObjectSetButton);
             this.Controls.Add(this.RemoveTextureChangeButton);

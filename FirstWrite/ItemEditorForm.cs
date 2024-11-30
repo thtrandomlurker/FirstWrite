@@ -154,5 +154,189 @@ namespace FirstWrite
             CharacterItemTable.Items.Add(new Item());
             Items.Items.Add($"{ActiveCharacter.ToString().ToUpper().Substring(0, 3)}ITM000");
         }
+
+        private void ItemNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (short.TryParse(ItemNumber.Text, out short value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].ItemNumber = value;
+                }
+            }
+        }
+
+        private void Type_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (byte.TryParse(Type.Text, out byte value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].Type = value;
+                }
+            }
+        }
+
+        private void U06_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (byte.TryParse(U06.Text, out byte value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].U06 = value;
+                }
+            }
+        }
+
+        private void U09_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (byte.TryParse(U09.Text, out byte value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].U09 = value;
+                }
+            }
+        }
+
+        private void U07_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (byte.TryParse(U07.Text, out byte value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].U07 = value;
+                }
+            }
+        }
+
+        private void U0F_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (byte.TryParse(U0F.Text, out byte value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].U0F = value;
+                }
+            }
+        }
+
+        private void U04_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (short.TryParse(U04.Text, out short value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].U04 = value;
+                }
+            }
+        }
+
+        private void Attribute_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (short.TryParse(Attribute.Text, out short value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].Attribute = value;
+                }
+            }
+        }
+
+        private void DestID_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (byte.TryParse(DestID.Text, out byte value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].DestID = value;
+                }
+            }
+        }
+
+        private void U10_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (int.TryParse(U10.Text, out int value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].U10 = value;
+                }
+            }
+        }
+
+        private void U14_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1)
+            {
+                if (int.TryParse(U14.Text, out int value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].U14 = value;
+                }
+            }
+        }
+
+        private void ObjectID_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1 && Objects.SelectedIndex != -1)
+            {
+                if (uint.TryParse(ObjectID.Text, out uint value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].Objects[Objects.SelectedIndex].ObjectID = value;
+                }
+            }
+        }
+
+        private void RPK_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1 && Objects.SelectedIndex != -1)
+            {
+                if (byte.TryParse(RPK.Text, out byte value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].Objects[Objects.SelectedIndex].RPK = value;
+                }
+            }
+        }
+
+        private void TexChangeSrc_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1 && TextureChanges.SelectedIndex != -1)
+            {
+                if (uint.TryParse(TexChangeSrc.Text, out uint value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].TextureChanges[TextureChanges.SelectedIndex].OriginalTextureID = value;
+                }
+            }
+        }
+
+        private void TexChangeDst_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1 && TextureChanges.SelectedIndex != -1)
+            {
+                if (uint.TryParse(TexChangeDst.Text, out uint value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].TextureChanges[TextureChanges.SelectedIndex].ReplacementTextureID = value;
+                }
+            }
+        }
+
+        private void ObjectSetID_TextChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1 && ObjectSets.SelectedIndex != -1)
+            {
+                if (uint.TryParse(ObjectSetID.Text, out uint value))
+                {
+                    CharacterItemTable.Items[Items.SelectedIndex].ObjectSets[ObjectSets.SelectedIndex] = value;
+                }
+            }
+        }
+
+        private void SubID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Items.SelectedIndex != -1 && SubID.SelectedIndex != -1)
+            {
+                CharacterItemTable.Items[Items.SelectedIndex].SubID = (SubID)SubID.SelectedIndex;  // this is more likely to work since it gets initialized with the values of the SubID enum.
+            }
+        }
     }
 }

@@ -107,7 +107,7 @@ namespace FirstLib.FirstRead
         public EffectType Effect;
         public CloudType Cloud;
         public CharacterType Character;
-        public byte U0C;
+        public ModuleRarity Rarity;
         public byte U0D;
         public byte U0E;
         public byte U0F;
@@ -123,7 +123,7 @@ namespace FirstLib.FirstRead
             Effect = (EffectType)reader.ReadInt16();
             Cloud = (CloudType)reader.ReadByte();
             Character = (CharacterType)reader.ReadByte();
-            U0C = reader.ReadByte();
+            Rarity = (ModuleRarity)reader.ReadByte();
             U0D = reader.ReadByte();
             U0E = reader.ReadByte();
             U0F = reader.ReadByte();
@@ -139,7 +139,7 @@ namespace FirstLib.FirstRead
             writer.Write((short)Effect);
             writer.Write((byte)Cloud);
             writer.Write((byte)Character);
-            writer.Write(U0C);
+            writer.Write((byte)Rarity);
             writer.Write(U0D);
             writer.Write(U0E);
             writer.Write(U0F);
@@ -1000,8 +1000,8 @@ namespace FirstLib.FirstRead
 
     public class ModuleUnlockOverrideDataSub
     {
-        byte Unlocked;
-        byte Unk02;
+        public byte Unlocked;
+        public byte Unk02;
 
         public void Read(XReader reader)
         {

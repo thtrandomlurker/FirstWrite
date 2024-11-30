@@ -108,5 +108,30 @@ namespace FirstWrite
             CharacterItemEditorForm characterItemEditor = new CharacterItemEditorForm(AddonContentContainer.RobDatabases[ACCTRobDatabases.SelectedIndex]);
             characterItemEditor.Show();
         }
+
+        private void RemoveRBDBButton_Click(object sender, EventArgs e)
+        {
+            if (ACCTRobDatabases.SelectedIndex != -1)
+            {
+                // why did i do it like this?
+                AddonContentContainer.RobDatabases.RemoveAt(ACCTRobDatabases.SelectedIndex);
+                ACCTRobDatabases.Items.RemoveAt(ACCTRobDatabases.SelectedIndex);
+            }
+        }
+
+        private void AddRBDBButton_Click(object sender, EventArgs e)
+        {
+            RBDB robDB = new RBDB();
+
+            // create some dummy tables
+
+            for (int i = 0; i < 11; i++)
+            {
+                robDB.CharacterItemTables.Add(new CharacterItemTable());
+            }
+
+            AddonContentContainer.RobDatabases.Add(robDB);
+            ACCTRobDatabases.Items.Add($"Rob Database {AddonContentContainer.RobDatabases.Count()}");
+        }
     }
 }

@@ -39,6 +39,7 @@ namespace FirstWrite
             // CharacterItemTables
             // 
             this.CharacterItemTables.FormattingEnabled = true;
+            this.CharacterItemTables.ItemHeight = 12;
             this.CharacterItemTables.Items.AddRange(new object[] {
             "Miku",
             "Rin",
@@ -49,28 +50,30 @@ namespace FirstWrite
             "Kaito",
             "Meiko",
             "Sakine",
-            "Teto"});
-            this.CharacterItemTables.Location = new System.Drawing.Point(12, 35);
+            "Teto",
+            "Extra"});
+            this.CharacterItemTables.Location = new System.Drawing.Point(12, 32);
             this.CharacterItemTables.Name = "CharacterItemTables";
-            this.CharacterItemTables.Size = new System.Drawing.Size(194, 134);
+            this.CharacterItemTables.Size = new System.Drawing.Size(194, 136);
             this.CharacterItemTables.TabIndex = 0;
             this.CharacterItemTables.SelectedIndexChanged += new System.EventHandler(this.CharacterItems_SelectedIndexChanged);
             // 
             // KeepInFile
             // 
             this.KeepInFile.AutoSize = true;
-            this.KeepInFile.Location = new System.Drawing.Point(12, 12);
+            this.KeepInFile.Location = new System.Drawing.Point(12, 11);
             this.KeepInFile.Name = "KeepInFile";
-            this.KeepInFile.Size = new System.Drawing.Size(82, 17);
+            this.KeepInFile.Size = new System.Drawing.Size(85, 16);
             this.KeepInFile.TabIndex = 1;
             this.KeepInFile.Text = "Keep In File";
             this.KeepInFile.UseVisualStyleBackColor = true;
+            this.KeepInFile.CheckedChanged += new System.EventHandler(this.KeepInFile_CheckedChanged);
             // 
             // ItemButton
             // 
-            this.ItemButton.Location = new System.Drawing.Point(12, 175);
+            this.ItemButton.Location = new System.Drawing.Point(12, 174);
             this.ItemButton.Name = "ItemButton";
-            this.ItemButton.Size = new System.Drawing.Size(61, 23);
+            this.ItemButton.Size = new System.Drawing.Size(61, 21);
             this.ItemButton.TabIndex = 2;
             this.ItemButton.Text = "Items";
             this.ItemButton.UseVisualStyleBackColor = true;
@@ -78,27 +81,28 @@ namespace FirstWrite
             // 
             // CostumeButton
             // 
-            this.CostumeButton.Location = new System.Drawing.Point(145, 175);
+            this.CostumeButton.Location = new System.Drawing.Point(145, 174);
             this.CostumeButton.Name = "CostumeButton";
-            this.CostumeButton.Size = new System.Drawing.Size(61, 23);
+            this.CostumeButton.Size = new System.Drawing.Size(61, 21);
             this.CostumeButton.TabIndex = 3;
             this.CostumeButton.Text = "Costumes";
             this.CostumeButton.UseVisualStyleBackColor = true;
+            this.CostumeButton.Click += new System.EventHandler(this.CostumeButton_Click);
             // 
             // AdjustButton
             // 
-            this.AdjustButton.Location = new System.Drawing.Point(78, 175);
+            this.AdjustButton.Location = new System.Drawing.Point(78, 174);
             this.AdjustButton.Name = "AdjustButton";
-            this.AdjustButton.Size = new System.Drawing.Size(61, 23);
+            this.AdjustButton.Size = new System.Drawing.Size(61, 21);
             this.AdjustButton.TabIndex = 4;
             this.AdjustButton.Text = "Adjusts";
             this.AdjustButton.UseVisualStyleBackColor = true;
             // 
             // CharacterItemEditorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(218, 208);
+            this.ClientSize = new System.Drawing.Size(218, 201);
             this.Controls.Add(this.AdjustButton);
             this.Controls.Add(this.CostumeButton);
             this.Controls.Add(this.ItemButton);

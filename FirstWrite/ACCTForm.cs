@@ -42,6 +42,7 @@ namespace FirstWrite
             {
                 ACCTPath.Text = AddonContentContainer.Paths[ACCTPaths.SelectedIndex].FilePath;
                 ACCTFile.Text = AddonContentContainer.Paths[ACCTPaths.SelectedIndex].FileName;
+                PathMode.Text = AddonContentContainer.Paths[ACCTPaths.SelectedIndex].Flags.ToString();
             }
         }
 
@@ -75,7 +76,7 @@ namespace FirstWrite
 
         private void ACCTPathsAddButton_Click(object sender, EventArgs e)
         {
-            AddonContentContainer.Paths.Add(new ACCTPath() {FilePath = "", FileName = "NewFile"});
+            AddonContentContainer.Paths.Add(new ACCTPath() {FilePath = "", FileName = "NewFile", Flags = ACCTPathMode.Packed});
             ACCTPaths.Items.Add("NewFile");
         }
 
@@ -163,6 +164,55 @@ namespace FirstWrite
             if (int.TryParse(ACCTContainerID.Text, out int ID))
             {
                 AddonContentContainer.ContainerID = ID;
+            }
+        }
+
+        private void moduleInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AddonContentContainer.ParameterDatabases.Count() != 0)
+            {
+                ParamModuleInfoEditorForm moduleInfoForm = new ParamModuleInfoEditorForm(AddonContentContainer.ParameterDatabases[0].ModuleTable);
+                moduleInfoForm.Show();
+            }
+        }
+
+        private void createPRDBIfNotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddonContentContainer.ParameterDatabases.Clear();
+            AddonContentContainer.ParameterDatabases.Add(new PRDB());
+            AddonContentContainer.ParameterDatabases[0].U00 = 4194304;
+        }
+
+        private void moduleUnlockOverrideInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (AddonContentContainer.ParameterDatabases.Count() != 0)
+            {
+                ParamModuleUnlockOverridesEditorForm overrideForm = new ParamModuleUnlockOverridesEditorForm(AddonContentContainer.ParameterDatabases[0].ModuleUnlockOverrideTable);
+                overrideForm.Show();
+            }
+        }
+
+        private void PathMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ACCTPaths.SelectedIndex != -1)
+            {
+                AddonContentContainer.Paths[ACCTPaths.SelectedIndex].Flags = (ACCTPathMode)Enum.Parse(typeof(ACCTPathMode), PathMode.Text);
+            }
+        }
+
+        private void packedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var path in AddonContentContainer.Paths)
+            {
+                path.Flags = ACCTPathMode.Packed;
+            }
+        }
+
+        private void unpackedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var path in AddonContentContainer.Paths)
+            {
+                path.Flags = ACCTPathMode.Unpacked;
             }
         }
     }

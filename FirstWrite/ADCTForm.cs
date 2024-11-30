@@ -105,8 +105,11 @@ namespace FirstWrite
 
         private void ACCTEditButton_Click(object sender, EventArgs e)
         {
-            ACCTForm addonContentContainerEditor = new ACCTForm(AddonContent.AddonContentContainers[ADCTContainers.SelectedIndex]);
-            addonContentContainerEditor.Show();
+            if (ADCTContainers.SelectedIndex != -1)
+            {
+                ACCTForm addonContentContainerEditor = new ACCTForm(AddonContent.AddonContentContainers[ADCTContainers.SelectedIndex]);
+                addonContentContainerEditor.Show();
+            }
         }
 
         private void ACCTRenameButton_Click(object sender, EventArgs e)
@@ -115,15 +118,18 @@ namespace FirstWrite
             {
                 if (renameForm.ShowDialog() == DialogResult.OK)
                 {
-                    ADCTContainers.Items[ADCTContainers.SelectedIndex] = renameForm.NewVal;
-                    AddonContent.AddonContentContainers[ADCTContainers.SelectedIndex].ContainerName = renameForm.NewVal;
+                    if (ADCTContainers.SelectedIndex != -1)
+                    {
+                        ADCTContainers.Items[ADCTContainers.SelectedIndex] = renameForm.NewVal;
+                        AddonContent.AddonContentContainers[ADCTContainers.SelectedIndex].ContainerName = renameForm.NewVal;
+                    }
                 }
             }
         }
 
         private void ADCTAddACCTButton_Click(object sender, EventArgs e)
         {
-            AddonContent.AddonContentContainers.Add(new ACCT() { ContainerName = "cnt_new" });
+            AddonContent.AddonContentContainers.Add(new ACCT() { ContainerName = "cnt_new", U08 = 1 });
             ADCTContainers.Items.Add("cnt_new");
         }
 

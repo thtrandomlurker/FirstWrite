@@ -8,18 +8,24 @@ using FirstLib.IO;
 
 namespace FirstLib.FirstRead
 {
+
+    public enum ACCTPathMode
+    {
+        Unpacked,
+        Packed
+    }
     // structure figured out by korenkonder
     public class ACCTPath
     {
         public String FilePath;
         public String FileName;
-        public Int32 Flags;
+        public ACCTPathMode Flags;
 
         public void Read(XReader reader, int strOffset)
         {
             int filePathPos = reader.ReadInt32();
             int fileNamePos = reader.ReadInt32();
-            Flags = reader.ReadInt32();
+            Flags = (ACCTPathMode)reader.ReadInt32();
             FilePath = reader.ReadStringAtOffset(strOffset + filePathPos, StringFormat.NullTerminated);
             FileName = reader.ReadStringAtOffset(strOffset + fileNamePos, StringFormat.NullTerminated);
         }
@@ -186,7 +192,7 @@ namespace FirstLib.FirstRead
                     writer.Write(baseStrPos);
                     baseStrPos += Encoding.UTF8.GetByteCount(path.FileName) + 1;
                 }
-                writer.Write(path.Flags);
+                writer.Write((int)path.Flags);
             }
             writer.Align(16);
             // the flists are simpler since their contents must exist in paths

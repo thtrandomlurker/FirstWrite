@@ -65,11 +65,29 @@
     <Compile Include="CharacterItemEditorForm.Designer.cs">
       <DependentUpon>CharacterItemEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CostumeEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CostumeEditorForm.Designer.cs">
+      <DependentUpon>CostumeEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ItemEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ItemEditorForm.Designer.cs">
       <DependentUpon>ItemEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ParamModuleInfoEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParamModuleInfoEditorForm.Designer.cs">
+      <DependentUpon>ParamModuleInfoEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ParamModuleUnlockOverridesEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParamModuleUnlockOverridesEditorForm.Designer.cs">
+      <DependentUpon>ParamModuleUnlockOverridesEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,8 +118,17 @@
     <EmbeddedResource Include="CharacterItemEditorForm.resx">
       <DependentUpon>CharacterItemEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CostumeEditorForm.resx">
+      <DependentUpon>CostumeEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ItemEditorForm.resx">
       <DependentUpon>ItemEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParamModuleInfoEditorForm.resx">
+      <DependentUpon>ParamModuleInfoEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParamModuleUnlockOverridesEditorForm.resx">
+      <DependentUpon>ParamModuleUnlockOverridesEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

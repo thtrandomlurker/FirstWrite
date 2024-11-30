@@ -62,32 +62,41 @@ namespace FirstWrite
             this.ACCTObjsetFlist = new System.Windows.Forms.ListBox();
             this.ACCTContainerIDLabel = new System.Windows.Forms.Label();
             this.ACCTContainerID = new System.Windows.Forms.TextBox();
+            this.moduleInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moduleUnlockOverrideInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createPRDBIfNotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PathModeLabel = new System.Windows.Forms.Label();
+            this.PathMode = new System.Windows.Forms.ComboBox();
+            this.makeAllPathsUnpackedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.packedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unpackedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ACCTMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ACCTNameLabel
             // 
             this.ACCTNameLabel.AutoSize = true;
-            this.ACCTNameLabel.Location = new System.Drawing.Point(12, 24);
+            this.ACCTNameLabel.Location = new System.Drawing.Point(12, 22);
             this.ACCTNameLabel.Name = "ACCTNameLabel";
-            this.ACCTNameLabel.Size = new System.Drawing.Size(0, 13);
+            this.ACCTNameLabel.Size = new System.Drawing.Size(0, 12);
             this.ACCTNameLabel.TabIndex = 0;
             // 
             // ACCTPaths
             // 
             this.ACCTPaths.FormattingEnabled = true;
-            this.ACCTPaths.Location = new System.Drawing.Point(12, 68);
+            this.ACCTPaths.ItemHeight = 12;
+            this.ACCTPaths.Location = new System.Drawing.Point(12, 63);
             this.ACCTPaths.Name = "ACCTPaths";
-            this.ACCTPaths.Size = new System.Drawing.Size(156, 160);
+            this.ACCTPaths.Size = new System.Drawing.Size(156, 148);
             this.ACCTPaths.TabIndex = 1;
             this.ACCTPaths.SelectedIndexChanged += new System.EventHandler(this.ACCTPaths_SelectedIndexChanged);
             // 
             // ACCTPathsLabel
             // 
             this.ACCTPathsLabel.AutoSize = true;
-            this.ACCTPathsLabel.Location = new System.Drawing.Point(11, 52);
+            this.ACCTPathsLabel.Location = new System.Drawing.Point(11, 48);
             this.ACCTPathsLabel.Name = "ACCTPathsLabel";
-            this.ACCTPathsLabel.Size = new System.Drawing.Size(37, 13);
+            this.ACCTPathsLabel.Size = new System.Drawing.Size(36, 12);
             this.ACCTPathsLabel.TabIndex = 2;
             this.ACCTPathsLabel.Text = "Paths:";
             // 
@@ -115,19 +124,19 @@ namespace FirstWrite
             // ACCTExportMenuOption
             // 
             this.ACCTExportMenuOption.Name = "ACCTExportMenuOption";
-            this.ACCTExportMenuOption.Size = new System.Drawing.Size(107, 22);
+            this.ACCTExportMenuOption.Size = new System.Drawing.Size(108, 22);
             this.ACCTExportMenuOption.Text = "Export";
             this.ACCTExportMenuOption.Click += new System.EventHandler(this.ACCTExportMenuOption_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(104, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(105, 6);
             // 
             // ACCTCloseMenuOption
             // 
             this.ACCTCloseMenuOption.Name = "ACCTCloseMenuOption";
-            this.ACCTCloseMenuOption.Size = new System.Drawing.Size(107, 22);
+            this.ACCTCloseMenuOption.Size = new System.Drawing.Size(108, 22);
             this.ACCTCloseMenuOption.Text = "Close";
             // 
             // editToolStripMenuItem
@@ -135,7 +144,8 @@ namespace FirstWrite
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stringArrayEditorToolStripMenuItem,
             this.robDatabaseEditorToolStripMenuItem,
-            this.parameterDatabaseEditorUnderConstructionToolStripMenuItem});
+            this.parameterDatabaseEditorUnderConstructionToolStripMenuItem,
+            this.makeAllPathsUnpackedToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -143,54 +153,58 @@ namespace FirstWrite
             // stringArrayEditorToolStripMenuItem
             // 
             this.stringArrayEditorToolStripMenuItem.Name = "stringArrayEditorToolStripMenuItem";
-            this.stringArrayEditorToolStripMenuItem.Size = new System.Drawing.Size(328, 22);
+            this.stringArrayEditorToolStripMenuItem.Size = new System.Drawing.Size(415, 22);
             this.stringArrayEditorToolStripMenuItem.Text = "String Array Editor";
             this.stringArrayEditorToolStripMenuItem.Click += new System.EventHandler(this.stringArrayEditorToolStripMenuItem_Click);
             // 
             // robDatabaseEditorToolStripMenuItem
             // 
             this.robDatabaseEditorToolStripMenuItem.Name = "robDatabaseEditorToolStripMenuItem";
-            this.robDatabaseEditorToolStripMenuItem.Size = new System.Drawing.Size(328, 22);
+            this.robDatabaseEditorToolStripMenuItem.Size = new System.Drawing.Size(415, 22);
             this.robDatabaseEditorToolStripMenuItem.Text = "Rob Database Editor";
             this.robDatabaseEditorToolStripMenuItem.Click += new System.EventHandler(this.robDatabaseEditorToolStripMenuItem_Click);
             // 
             // parameterDatabaseEditorUnderConstructionToolStripMenuItem
             // 
+            this.parameterDatabaseEditorUnderConstructionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.moduleInfoToolStripMenuItem,
+            this.moduleUnlockOverrideInfoToolStripMenuItem,
+            this.createPRDBIfNotToolStripMenuItem});
             this.parameterDatabaseEditorUnderConstructionToolStripMenuItem.Name = "parameterDatabaseEditorUnderConstructionToolStripMenuItem";
-            this.parameterDatabaseEditorUnderConstructionToolStripMenuItem.Size = new System.Drawing.Size(328, 22);
-            this.parameterDatabaseEditorUnderConstructionToolStripMenuItem.Text = "Parameter Database Editor (Under Construction)";
+            this.parameterDatabaseEditorUnderConstructionToolStripMenuItem.Size = new System.Drawing.Size(415, 22);
+            this.parameterDatabaseEditorUnderConstructionToolStripMenuItem.Text = "Parameter Database Editor (Grand Opening - Modules 100% Off!)";
             // 
             // ACCTPathLabel
             // 
             this.ACCTPathLabel.AutoSize = true;
-            this.ACCTPathLabel.Location = new System.Drawing.Point(174, 68);
+            this.ACCTPathLabel.Location = new System.Drawing.Point(174, 63);
             this.ACCTPathLabel.Name = "ACCTPathLabel";
-            this.ACCTPathLabel.Size = new System.Drawing.Size(32, 13);
+            this.ACCTPathLabel.Size = new System.Drawing.Size(30, 12);
             this.ACCTPathLabel.TabIndex = 4;
             this.ACCTPathLabel.Text = "Path:";
             // 
             // ACCTPath
             // 
-            this.ACCTPath.Location = new System.Drawing.Point(173, 84);
+            this.ACCTPath.Location = new System.Drawing.Point(173, 78);
             this.ACCTPath.Name = "ACCTPath";
-            this.ACCTPath.Size = new System.Drawing.Size(137, 20);
+            this.ACCTPath.Size = new System.Drawing.Size(137, 19);
             this.ACCTPath.TabIndex = 5;
             this.ACCTPath.TextChanged += new System.EventHandler(this.ACCTPath_TextChanged);
             // 
             // ACCTFile
             // 
-            this.ACCTFile.Location = new System.Drawing.Point(173, 123);
+            this.ACCTFile.Location = new System.Drawing.Point(173, 114);
             this.ACCTFile.Name = "ACCTFile";
-            this.ACCTFile.Size = new System.Drawing.Size(137, 20);
+            this.ACCTFile.Size = new System.Drawing.Size(137, 19);
             this.ACCTFile.TabIndex = 7;
             this.ACCTFile.TextChanged += new System.EventHandler(this.ACCTFile_TextChanged);
             // 
             // ACCTFileLabel
             // 
             this.ACCTFileLabel.AutoSize = true;
-            this.ACCTFileLabel.Location = new System.Drawing.Point(174, 107);
+            this.ACCTFileLabel.Location = new System.Drawing.Point(174, 99);
             this.ACCTFileLabel.Name = "ACCTFileLabel";
-            this.ACCTFileLabel.Size = new System.Drawing.Size(26, 13);
+            this.ACCTFileLabel.Size = new System.Drawing.Size(26, 12);
             this.ACCTFileLabel.TabIndex = 6;
             this.ACCTFileLabel.Text = "File:";
             // 
@@ -200,9 +214,9 @@ namespace FirstWrite
             // 
             // ACCTPathsAddButton
             // 
-            this.ACCTPathsAddButton.Location = new System.Drawing.Point(12, 234);
+            this.ACCTPathsAddButton.Location = new System.Drawing.Point(12, 216);
             this.ACCTPathsAddButton.Name = "ACCTPathsAddButton";
-            this.ACCTPathsAddButton.Size = new System.Drawing.Size(75, 23);
+            this.ACCTPathsAddButton.Size = new System.Drawing.Size(75, 21);
             this.ACCTPathsAddButton.TabIndex = 8;
             this.ACCTPathsAddButton.Text = "Add";
             this.ACCTPathsAddButton.UseVisualStyleBackColor = true;
@@ -210,9 +224,9 @@ namespace FirstWrite
             // 
             // ACCTPathsRemove
             // 
-            this.ACCTPathsRemove.Location = new System.Drawing.Point(93, 234);
+            this.ACCTPathsRemove.Location = new System.Drawing.Point(93, 216);
             this.ACCTPathsRemove.Name = "ACCTPathsRemove";
-            this.ACCTPathsRemove.Size = new System.Drawing.Size(75, 23);
+            this.ACCTPathsRemove.Size = new System.Drawing.Size(75, 21);
             this.ACCTPathsRemove.TabIndex = 9;
             this.ACCTPathsRemove.Text = "Remove";
             this.ACCTPathsRemove.UseVisualStyleBackColor = true;
@@ -221,26 +235,27 @@ namespace FirstWrite
             // ACCTAuth2DFlist
             // 
             this.ACCTAuth2DFlist.FormattingEnabled = true;
-            this.ACCTAuth2DFlist.Location = new System.Drawing.Point(316, 68);
+            this.ACCTAuth2DFlist.ItemHeight = 12;
+            this.ACCTAuth2DFlist.Location = new System.Drawing.Point(316, 63);
             this.ACCTAuth2DFlist.Name = "ACCTAuth2DFlist";
-            this.ACCTAuth2DFlist.Size = new System.Drawing.Size(155, 160);
+            this.ACCTAuth2DFlist.Size = new System.Drawing.Size(155, 148);
             this.ACCTAuth2DFlist.TabIndex = 10;
             this.ACCTAuth2DFlist.SelectedIndexChanged += new System.EventHandler(this.ACCTAuth2DFlist_SelectedIndexChanged);
             // 
             // ACCTAuth2DFlistLabel
             // 
             this.ACCTAuth2DFlistLabel.AutoSize = true;
-            this.ACCTAuth2DFlistLabel.Location = new System.Drawing.Point(313, 52);
+            this.ACCTAuth2DFlistLabel.Location = new System.Drawing.Point(313, 48);
             this.ACCTAuth2DFlistLabel.Name = "ACCTAuth2DFlistLabel";
-            this.ACCTAuth2DFlistLabel.Size = new System.Drawing.Size(84, 13);
+            this.ACCTAuth2DFlistLabel.Size = new System.Drawing.Size(91, 12);
             this.ACCTAuth2DFlistLabel.TabIndex = 11;
             this.ACCTAuth2DFlistLabel.Text = "Auth2D File List:";
             // 
             // ACCTAuth2DFlistRemoveButton
             // 
-            this.ACCTAuth2DFlistRemoveButton.Location = new System.Drawing.Point(396, 234);
+            this.ACCTAuth2DFlistRemoveButton.Location = new System.Drawing.Point(396, 216);
             this.ACCTAuth2DFlistRemoveButton.Name = "ACCTAuth2DFlistRemoveButton";
-            this.ACCTAuth2DFlistRemoveButton.Size = new System.Drawing.Size(75, 23);
+            this.ACCTAuth2DFlistRemoveButton.Size = new System.Drawing.Size(75, 21);
             this.ACCTAuth2DFlistRemoveButton.TabIndex = 13;
             this.ACCTAuth2DFlistRemoveButton.Text = "Remove";
             this.ACCTAuth2DFlistRemoveButton.UseVisualStyleBackColor = true;
@@ -248,9 +263,9 @@ namespace FirstWrite
             // 
             // ACCTAuth2DFlistAddButton
             // 
-            this.ACCTAuth2DFlistAddButton.Location = new System.Drawing.Point(316, 234);
+            this.ACCTAuth2DFlistAddButton.Location = new System.Drawing.Point(316, 216);
             this.ACCTAuth2DFlistAddButton.Name = "ACCTAuth2DFlistAddButton";
-            this.ACCTAuth2DFlistAddButton.Size = new System.Drawing.Size(75, 23);
+            this.ACCTAuth2DFlistAddButton.Size = new System.Drawing.Size(75, 21);
             this.ACCTAuth2DFlistAddButton.TabIndex = 12;
             this.ACCTAuth2DFlistAddButton.Text = "Add";
             this.ACCTAuth2DFlistAddButton.UseVisualStyleBackColor = true;
@@ -258,43 +273,43 @@ namespace FirstWrite
             // 
             // ACCTAuth2DFile
             // 
-            this.ACCTAuth2DFile.Location = new System.Drawing.Point(476, 84);
+            this.ACCTAuth2DFile.Location = new System.Drawing.Point(476, 78);
             this.ACCTAuth2DFile.Name = "ACCTAuth2DFile";
-            this.ACCTAuth2DFile.Size = new System.Drawing.Size(137, 20);
+            this.ACCTAuth2DFile.Size = new System.Drawing.Size(137, 19);
             this.ACCTAuth2DFile.TabIndex = 15;
             this.ACCTAuth2DFile.TextChanged += new System.EventHandler(this.ACCTAuth2DFile_TextChanged);
             // 
             // ACCTAuth2DFileLabel
             // 
             this.ACCTAuth2DFileLabel.AutoSize = true;
-            this.ACCTAuth2DFileLabel.Location = new System.Drawing.Point(477, 68);
+            this.ACCTAuth2DFileLabel.Location = new System.Drawing.Point(477, 63);
             this.ACCTAuth2DFileLabel.Name = "ACCTAuth2DFileLabel";
-            this.ACCTAuth2DFileLabel.Size = new System.Drawing.Size(26, 13);
+            this.ACCTAuth2DFileLabel.Size = new System.Drawing.Size(26, 12);
             this.ACCTAuth2DFileLabel.TabIndex = 14;
             this.ACCTAuth2DFileLabel.Text = "File:";
             // 
             // ACCTObjsetFile
             // 
-            this.ACCTObjsetFile.Location = new System.Drawing.Point(779, 84);
+            this.ACCTObjsetFile.Location = new System.Drawing.Point(779, 78);
             this.ACCTObjsetFile.Name = "ACCTObjsetFile";
-            this.ACCTObjsetFile.Size = new System.Drawing.Size(137, 20);
+            this.ACCTObjsetFile.Size = new System.Drawing.Size(137, 19);
             this.ACCTObjsetFile.TabIndex = 21;
             this.ACCTObjsetFile.TextChanged += new System.EventHandler(this.ACCTObjsetFile_TextChanged);
             // 
             // ACCTObjsetFileLabel
             // 
             this.ACCTObjsetFileLabel.AutoSize = true;
-            this.ACCTObjsetFileLabel.Location = new System.Drawing.Point(780, 68);
+            this.ACCTObjsetFileLabel.Location = new System.Drawing.Point(780, 63);
             this.ACCTObjsetFileLabel.Name = "ACCTObjsetFileLabel";
-            this.ACCTObjsetFileLabel.Size = new System.Drawing.Size(26, 13);
+            this.ACCTObjsetFileLabel.Size = new System.Drawing.Size(26, 12);
             this.ACCTObjsetFileLabel.TabIndex = 20;
             this.ACCTObjsetFileLabel.Text = "File:";
             // 
             // ACCTObjsetFlistRemoveButton
             // 
-            this.ACCTObjsetFlistRemoveButton.Location = new System.Drawing.Point(699, 234);
+            this.ACCTObjsetFlistRemoveButton.Location = new System.Drawing.Point(699, 216);
             this.ACCTObjsetFlistRemoveButton.Name = "ACCTObjsetFlistRemoveButton";
-            this.ACCTObjsetFlistRemoveButton.Size = new System.Drawing.Size(75, 23);
+            this.ACCTObjsetFlistRemoveButton.Size = new System.Drawing.Size(75, 21);
             this.ACCTObjsetFlistRemoveButton.TabIndex = 19;
             this.ACCTObjsetFlistRemoveButton.Text = "Remove";
             this.ACCTObjsetFlistRemoveButton.UseVisualStyleBackColor = true;
@@ -302,9 +317,9 @@ namespace FirstWrite
             // 
             // ACCTObjsetFlistAddButton
             // 
-            this.ACCTObjsetFlistAddButton.Location = new System.Drawing.Point(619, 234);
+            this.ACCTObjsetFlistAddButton.Location = new System.Drawing.Point(619, 216);
             this.ACCTObjsetFlistAddButton.Name = "ACCTObjsetFlistAddButton";
-            this.ACCTObjsetFlistAddButton.Size = new System.Drawing.Size(75, 23);
+            this.ACCTObjsetFlistAddButton.Size = new System.Drawing.Size(75, 21);
             this.ACCTObjsetFlistAddButton.TabIndex = 18;
             this.ACCTObjsetFlistAddButton.Text = "Add";
             this.ACCTObjsetFlistAddButton.UseVisualStyleBackColor = true;
@@ -313,43 +328,111 @@ namespace FirstWrite
             // ACCTObjsetFlistLabel
             // 
             this.ACCTObjsetFlistLabel.AutoSize = true;
-            this.ACCTObjsetFlistLabel.Location = new System.Drawing.Point(616, 52);
+            this.ACCTObjsetFlistLabel.Location = new System.Drawing.Point(616, 48);
             this.ACCTObjsetFlistLabel.Name = "ACCTObjsetFlistLabel";
-            this.ACCTObjsetFlistLabel.Size = new System.Drawing.Size(78, 13);
+            this.ACCTObjsetFlistLabel.Size = new System.Drawing.Size(86, 12);
             this.ACCTObjsetFlistLabel.TabIndex = 17;
             this.ACCTObjsetFlistLabel.Text = "Objset File List:";
             // 
             // ACCTObjsetFlist
             // 
             this.ACCTObjsetFlist.FormattingEnabled = true;
-            this.ACCTObjsetFlist.Location = new System.Drawing.Point(619, 68);
+            this.ACCTObjsetFlist.ItemHeight = 12;
+            this.ACCTObjsetFlist.Location = new System.Drawing.Point(619, 63);
             this.ACCTObjsetFlist.Name = "ACCTObjsetFlist";
-            this.ACCTObjsetFlist.Size = new System.Drawing.Size(155, 160);
+            this.ACCTObjsetFlist.Size = new System.Drawing.Size(155, 148);
             this.ACCTObjsetFlist.TabIndex = 16;
             this.ACCTObjsetFlist.SelectedIndexChanged += new System.EventHandler(this.ACCTObjsetFlist_SelectedIndexChanged);
             // 
             // ACCTContainerIDLabel
             // 
             this.ACCTContainerIDLabel.AutoSize = true;
-            this.ACCTContainerIDLabel.Location = new System.Drawing.Point(313, 24);
+            this.ACCTContainerIDLabel.Location = new System.Drawing.Point(313, 22);
             this.ACCTContainerIDLabel.Name = "ACCTContainerIDLabel";
-            this.ACCTContainerIDLabel.Size = new System.Drawing.Size(69, 13);
+            this.ACCTContainerIDLabel.Size = new System.Drawing.Size(71, 12);
             this.ACCTContainerIDLabel.TabIndex = 22;
             this.ACCTContainerIDLabel.Text = "Container ID:";
             // 
             // ACCTContainerID
             // 
-            this.ACCTContainerID.Location = new System.Drawing.Point(388, 24);
+            this.ACCTContainerID.Location = new System.Drawing.Point(388, 22);
             this.ACCTContainerID.Name = "ACCTContainerID";
-            this.ACCTContainerID.Size = new System.Drawing.Size(100, 20);
+            this.ACCTContainerID.Size = new System.Drawing.Size(100, 19);
             this.ACCTContainerID.TabIndex = 23;
             this.ACCTContainerID.TextChanged += new System.EventHandler(this.ACCTContainerID_TextChanged);
             // 
+            // moduleInfoToolStripMenuItem
+            // 
+            this.moduleInfoToolStripMenuItem.Name = "moduleInfoToolStripMenuItem";
+            this.moduleInfoToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.moduleInfoToolStripMenuItem.Text = "Module Info";
+            this.moduleInfoToolStripMenuItem.Click += new System.EventHandler(this.moduleInfoToolStripMenuItem_Click);
+            // 
+            // moduleUnlockOverrideInfoToolStripMenuItem
+            // 
+            this.moduleUnlockOverrideInfoToolStripMenuItem.Name = "moduleUnlockOverrideInfoToolStripMenuItem";
+            this.moduleUnlockOverrideInfoToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.moduleUnlockOverrideInfoToolStripMenuItem.Text = "Module Unlock Override Info";
+            this.moduleUnlockOverrideInfoToolStripMenuItem.Click += new System.EventHandler(this.moduleUnlockOverrideInfoToolStripMenuItem_Click);
+            // 
+            // createPRDBIfNotToolStripMenuItem
+            // 
+            this.createPRDBIfNotToolStripMenuItem.Name = "createPRDBIfNotToolStripMenuItem";
+            this.createPRDBIfNotToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.createPRDBIfNotToolStripMenuItem.Text = "Create PRDB (If not already present)";
+            this.createPRDBIfNotToolStripMenuItem.Click += new System.EventHandler(this.createPRDBIfNotToolStripMenuItem_Click);
+            // 
+            // PathModeLabel
+            // 
+            this.PathModeLabel.AutoSize = true;
+            this.PathModeLabel.Location = new System.Drawing.Point(174, 136);
+            this.PathModeLabel.Name = "PathModeLabel";
+            this.PathModeLabel.Size = new System.Drawing.Size(59, 12);
+            this.PathModeLabel.TabIndex = 24;
+            this.PathModeLabel.Text = "Path Mode";
+            // 
+            // PathMode
+            // 
+            this.PathMode.FormattingEnabled = true;
+            this.PathMode.Items.AddRange(new object[] {
+            "Unpacked",
+            "Packed"});
+            this.PathMode.Location = new System.Drawing.Point(173, 151);
+            this.PathMode.Name = "PathMode";
+            this.PathMode.Size = new System.Drawing.Size(137, 20);
+            this.PathMode.TabIndex = 25;
+            this.PathMode.SelectedIndexChanged += new System.EventHandler(this.PathMode_SelectedIndexChanged);
+            // 
+            // makeAllPathsUnpackedToolStripMenuItem
+            // 
+            this.makeAllPathsUnpackedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.packedToolStripMenuItem,
+            this.unpackedToolStripMenuItem});
+            this.makeAllPathsUnpackedToolStripMenuItem.Name = "makeAllPathsUnpackedToolStripMenuItem";
+            this.makeAllPathsUnpackedToolStripMenuItem.Size = new System.Drawing.Size(415, 22);
+            this.makeAllPathsUnpackedToolStripMenuItem.Text = "Make All Paths...";
+            // 
+            // packedToolStripMenuItem
+            // 
+            this.packedToolStripMenuItem.Name = "packedToolStripMenuItem";
+            this.packedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.packedToolStripMenuItem.Text = "Packed";
+            this.packedToolStripMenuItem.Click += new System.EventHandler(this.packedToolStripMenuItem_Click);
+            // 
+            // unpackedToolStripMenuItem
+            // 
+            this.unpackedToolStripMenuItem.Name = "unpackedToolStripMenuItem";
+            this.unpackedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.unpackedToolStripMenuItem.Text = "Unpacked";
+            this.unpackedToolStripMenuItem.Click += new System.EventHandler(this.unpackedToolStripMenuItem_Click);
+            // 
             // ACCTForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 260);
+            this.ClientSize = new System.Drawing.Size(929, 240);
+            this.Controls.Add(this.PathMode);
+            this.Controls.Add(this.PathModeLabel);
             this.Controls.Add(this.ACCTContainerID);
             this.Controls.Add(this.ACCTContainerIDLabel);
             this.Controls.Add(this.ACCTObjsetFile);
@@ -419,5 +502,13 @@ namespace FirstWrite
         private System.Windows.Forms.ToolStripMenuItem parameterDatabaseEditorUnderConstructionToolStripMenuItem;
         private System.Windows.Forms.Label ACCTContainerIDLabel;
         private System.Windows.Forms.TextBox ACCTContainerID;
+        private System.Windows.Forms.ToolStripMenuItem moduleInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moduleUnlockOverrideInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createPRDBIfNotToolStripMenuItem;
+        private System.Windows.Forms.Label PathModeLabel;
+        private System.Windows.Forms.ComboBox PathMode;
+        private System.Windows.Forms.ToolStripMenuItem makeAllPathsUnpackedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem packedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unpackedToolStripMenuItem;
     }
 }

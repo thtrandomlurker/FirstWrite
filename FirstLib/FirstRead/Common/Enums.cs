@@ -36,17 +36,17 @@ namespace FirstLib.FirstRead.Common
     }
     public enum CharacterType
     {
-        Miku,
-        Rin,
-        Len,
-        Luka,
-        Neru,
-        Haku,
-        Kaito,
-        Meiko,
-        Sakine,
-        Teto,
-        Extra
+        MIK,
+        RIN,
+        LEN,
+        LUK,
+        NER,
+        HAK,
+        KAI,
+        MEI,
+        SAK,
+        TET,
+        EXT
     }
     public enum EffectType
     {
@@ -172,4 +172,10 @@ namespace FirstLib.FirstRead.Common
         NECK = 2,
         BACK = 3
     }
+    public enum ModuleRarity {
+        None = 0,
+        Common = 1,
+        Rare = 2
+    }
+
 }

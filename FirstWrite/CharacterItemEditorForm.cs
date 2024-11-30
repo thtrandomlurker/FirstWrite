@@ -34,5 +34,17 @@ namespace FirstWrite
                 KeepInFile.Checked = RobDatabase.CharacterItemTables[CharacterItemTables.SelectedIndex].KeepInFile;
             }
         }
+
+        private void CostumeButton_Click(object sender, EventArgs e)
+        {
+            CostumeEditorForm cosEditor = new CostumeEditorForm(RobDatabase.CharacterItemTables[CharacterItemTables.SelectedIndex], (CharacterType)CharacterItemTables.SelectedIndex);
+            cosEditor.Show();
+        }
+
+        private void KeepInFile_CheckedChanged(object sender, EventArgs e)
+        {
+            RobDatabase.CharacterItemTables[CharacterItemTables.SelectedIndex].KeepInFile = KeepInFile.Checked;
+            RobDatabase.PresentCharacters[CharacterItemTables.SelectedIndex] = KeepInFile.Checked;
+        }
     }
 }

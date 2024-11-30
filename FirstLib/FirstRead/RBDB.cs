@@ -393,7 +393,7 @@ namespace FirstLib.FirstRead
     {
         public XHeader Header;
         public int U00;
-        public bool[] PresentCharacters { get; } = new bool[10] {false, false, false, false, false, false, false, false, false, false};
+        public bool[] PresentCharacters { get; } = new bool[11] {false, false, false, false, false, false, false, false, false, false, false};
         public List<CharacterItemTable> CharacterItemTables;
         public List<Item> CustomizeItems;
 
@@ -408,7 +408,7 @@ namespace FirstLib.FirstRead
             short customizeItemCount = reader.ReadInt16();
             reader.ReadOffset(() =>
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 11; i++)
                 {
                     if ((tCharacters & (0b1 << i)) > 0)
                     {
@@ -461,7 +461,7 @@ namespace FirstLib.FirstRead
             int chritmCostumesSize = 0;
             int chritmCostumePartsSize = 0;
             int itemObjectSetsSize = 0;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 11; i++)
             {
                 if (PresentCharacters[i])
                 {

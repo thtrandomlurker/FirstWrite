@@ -37,6 +37,8 @@ namespace FirstWrite
             this.CustomizeItemEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.ACCTRobDatabases = new System.Windows.Forms.ListBox();
             this.RBDBExportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.AddRBDBButton = new System.Windows.Forms.Button();
+            this.RemoveRBDBButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +64,7 @@ namespace FirstWrite
             // ExportActiveRobDatabase
             // 
             this.ExportActiveRobDatabase.Name = "ExportActiveRobDatabase";
-            this.ExportActiveRobDatabase.Size = new System.Drawing.Size(175, 22);
+            this.ExportActiveRobDatabase.Size = new System.Drawing.Size(176, 22);
             this.ExportActiveRobDatabase.Text = "Export Active RBDB";
             this.ExportActiveRobDatabase.Click += new System.EventHandler(this.ExportActiveRobDatabase_Click);
             // 
@@ -78,29 +80,52 @@ namespace FirstWrite
             // CharacterItemEditor
             // 
             this.CharacterItemEditor.Name = "CharacterItemEditor";
-            this.CharacterItemEditor.Size = new System.Drawing.Size(191, 22);
+            this.CharacterItemEditor.Size = new System.Drawing.Size(188, 22);
             this.CharacterItemEditor.Text = "Character Item Editor";
             this.CharacterItemEditor.Click += new System.EventHandler(this.CharacterItemEditor_Click);
             // 
             // CustomizeItemEditor
             // 
             this.CustomizeItemEditor.Name = "CustomizeItemEditor";
-            this.CustomizeItemEditor.Size = new System.Drawing.Size(191, 22);
+            this.CustomizeItemEditor.Size = new System.Drawing.Size(188, 22);
             this.CustomizeItemEditor.Text = "Customize Item Editor";
             // 
             // ACCTRobDatabases
             // 
             this.ACCTRobDatabases.FormattingEnabled = true;
-            this.ACCTRobDatabases.Location = new System.Drawing.Point(14, 28);
+            this.ACCTRobDatabases.ItemHeight = 12;
+            this.ACCTRobDatabases.Location = new System.Drawing.Point(14, 26);
             this.ACCTRobDatabases.Name = "ACCTRobDatabases";
-            this.ACCTRobDatabases.Size = new System.Drawing.Size(130, 134);
+            this.ACCTRobDatabases.Size = new System.Drawing.Size(130, 124);
             this.ACCTRobDatabases.TabIndex = 1;
+            // 
+            // AddRBDBButton
+            // 
+            this.AddRBDBButton.Location = new System.Drawing.Point(14, 156);
+            this.AddRBDBButton.Name = "AddRBDBButton";
+            this.AddRBDBButton.Size = new System.Drawing.Size(130, 23);
+            this.AddRBDBButton.TabIndex = 2;
+            this.AddRBDBButton.Text = "Add";
+            this.AddRBDBButton.UseVisualStyleBackColor = true;
+            this.AddRBDBButton.Click += new System.EventHandler(this.AddRBDBButton_Click);
+            // 
+            // RemoveRBDBButton
+            // 
+            this.RemoveRBDBButton.Location = new System.Drawing.Point(14, 185);
+            this.RemoveRBDBButton.Name = "RemoveRBDBButton";
+            this.RemoveRBDBButton.Size = new System.Drawing.Size(130, 23);
+            this.RemoveRBDBButton.TabIndex = 2;
+            this.RemoveRBDBButton.Text = "Remove";
+            this.RemoveRBDBButton.UseVisualStyleBackColor = true;
+            this.RemoveRBDBButton.Click += new System.EventHandler(this.RemoveRBDBButton_Click);
             // 
             // RBDBForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(160, 169);
+            this.ClientSize = new System.Drawing.Size(160, 225);
+            this.Controls.Add(this.RemoveRBDBButton);
+            this.Controls.Add(this.AddRBDBButton);
             this.Controls.Add(this.ACCTRobDatabases);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -123,5 +148,7 @@ namespace FirstWrite
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CharacterItemEditor;
         private System.Windows.Forms.ToolStripMenuItem CustomizeItemEditor;
+        private System.Windows.Forms.Button AddRBDBButton;
+        private System.Windows.Forms.Button RemoveRBDBButton;
     }
 }
