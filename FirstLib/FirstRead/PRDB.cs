@@ -7,6 +7,7 @@ using FirstLib.IO;
 using System.Numerics;
 using System.IO;
 using FirstLib.FirstRead.Common;
+using System.Runtime.Remoting.Messaging;
 
 namespace FirstLib.FirstRead
 {
@@ -252,6 +253,10 @@ namespace FirstLib.FirstRead
             {
                 writer.WriteOffset((writer.Tell() + 24 + addSub01) - basePos, basePos);
             }
+            else
+            {
+                writer.Write((long)0);
+            }
             writer.Write((short)Modules.Count());
             writer.Write((short)RobSleeveData.Count());
             writer.Align(16);
@@ -264,6 +269,7 @@ namespace FirstLib.FirstRead
             {
                 info.Write(writer);
             }
+            writer.Align(16);
         }
         public ModuleTable()
         {
@@ -992,6 +998,125 @@ namespace FirstLib.FirstRead
         }
     }
 
+    public class ModuleUnlockOverrideDataSub
+    {
+        byte Unlocked;
+        byte Unk02;
+
+        public void Read(XReader reader)
+        {
+            Unlocked = reader.ReadByte();
+            Unk02 = reader.ReadByte();
+            reader.Seek(6, XSeekOrigin.Current);
+            reader.Seek(8, XSeekOrigin.Current);
+        }
+
+        public void Write(XWriter writer, int basePos)
+        {
+            writer.Write(Unlocked);
+            writer.Write(Unk02);
+            writer.WriteNulls(6);
+            writer.Write((long)0);
+        }
+
+    }
+
+    public class ModuleUnlockOverrideData
+    {
+        public int ModuleID;
+        public List<ModuleUnlockOverrideDataSub> OverrideFlags;
+
+        public void Read(XReader reader)
+        {
+            ModuleID = reader.ReadInt32();
+            byte overrideCount = reader.ReadByte();
+            reader.Seek(3, XSeekOrigin.Current);
+            long overridesOffset = reader.ReadInt64();
+
+            reader.ReadAtOffset((int)overridesOffset, () =>
+            {
+                for (int i = 0; i < overrideCount; i++)
+                {
+                    ModuleUnlockOverrideDataSub moduleOverride = new ModuleUnlockOverrideDataSub();
+                    moduleOverride.Read(reader);
+                    OverrideFlags.Add(moduleOverride);
+                }
+            });
+        }
+        
+        public int Write(XWriter writer, int flagsPos, int basePos)
+        {
+            int tmpFlagsPos = flagsPos;
+            writer.Write(ModuleID);
+            writer.Write((byte)OverrideFlags.Count());
+            writer.WriteNulls(3);
+            if (OverrideFlags.Count() != 0)
+            {
+                writer.WriteOffset(tmpFlagsPos - basePos, basePos);
+                long pre = writer.Tell();
+                writer.Seek(tmpFlagsPos, SeekOrigin.Begin);
+                foreach (var flag in OverrideFlags)
+                {
+                    flag.Write(writer, basePos);
+                }
+                writer.Align(16);
+                tmpFlagsPos = (int)writer.Tell();
+                writer.Seek((int)pre, SeekOrigin.Begin);
+            }
+            else
+                writer.Write((long)0);
+            return tmpFlagsPos;
+        }
+
+        public ModuleUnlockOverrideData()
+        {
+            OverrideFlags = new List<ModuleUnlockOverrideDataSub>();
+        }
+
+    }
+
+    public class ModuleUnlockOverrideTable
+    {
+        public List<ModuleUnlockOverrideData> UnlockOverrides { get; }
+
+        public void Read(XReader reader)
+        {
+            long moduleOverrideInfoOffset = reader.ReadInt64();
+            short moduleOverrideInfoCount = reader.ReadInt16();
+
+            reader.ReadAtOffset((int)moduleOverrideInfoOffset, () =>
+            {
+                for (int i = 0; i < moduleOverrideInfoCount; i++)
+                {
+                    ModuleUnlockOverrideData moduleOverride = new ModuleUnlockOverrideData();
+                    moduleOverride.Read(reader);
+                    UnlockOverrides.Add(moduleOverride);
+                }
+            });
+        }
+
+        public void Write(XWriter writer, int basePos)
+        {
+            if (UnlockOverrides.Count() != 0)
+                writer.WriteOffset((writer.Tell() + 16) - basePos, basePos);
+            else
+                writer.Write((long)0);
+            writer.Write((short)UnlockOverrides.Count());
+            writer.Align(16);
+            int flagsPos = (int)writer.Tell() + (0x10 * UnlockOverrides.Count());
+            foreach (var moduleOverride in UnlockOverrides)
+            {
+                flagsPos = moduleOverride.Write(writer, flagsPos, basePos);
+            }
+        }
+
+        public ModuleUnlockOverrideTable()
+        {
+            UnlockOverrides = new List<ModuleUnlockOverrideData>();
+        }
+
+    }
+
 
     // the PRDB
     public class PRDB
@@ -1007,6 +1132,9 @@ namespace FirstLib.FirstRead
         public PvTable PvTable;
         public StageTable StageTable;
         public SetBonusTable SetBonusTable;
+        // ...
+        // Sub22
+        public ModuleUnlockOverrideTable ModuleUnlockOverrideTable;
 
         public void Read(XReader reader)
         {
@@ -1038,7 +1166,7 @@ namespace FirstLib.FirstRead
             long sub19Offset = reader.ReadInt64();
             long sub20Offset = reader.ReadInt64();
             long sub21Offset = reader.ReadInt64();
-            long sub22Offset = reader.ReadInt64();
+            long moduleUnlockOverridesOffset = reader.ReadInt64();
             long sub23Offset = reader.ReadInt64();
             long sub24Offset = reader.ReadInt64();
             long sub25Offset = reader.ReadInt64();
@@ -1100,6 +1228,11 @@ namespace FirstLib.FirstRead
                 reader.Seek((int)setBonusOffset, XSeekOrigin.Base);
                 SetBonusTable.Read(reader);
             }
+            if (moduleUnlockOverridesOffset > 0)
+            {
+                reader.Seek((int)moduleUnlockOverridesOffset, XSeekOrigin.Base);
+                ModuleUnlockOverrideTable.Read(reader);
+            }
 
             // end of file
             reader.Seek(Header.DataSize, XSeekOrigin.Base);
@@ -1138,6 +1271,13 @@ namespace FirstLib.FirstRead
                 writer.Align(16);
                 baseOff = writer.Tell();
             }
+            else
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.Write((long)0);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            }
             // Sub01
             if (Sub01.Sub00s.Count() != 0)
             {
@@ -1148,6 +1288,13 @@ namespace FirstLib.FirstRead
                 Sub01.Write(writer, (int)dataPos);
                 writer.Align(16);
                 baseOff = writer.Tell();
+            }
+            else
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.Write((long)0);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
             }
             // Modules
             if (ModuleTable.Modules.Count() != 0 || ModuleTable.RobSleeveData.Count() != 0)
@@ -1160,6 +1307,13 @@ namespace FirstLib.FirstRead
                 writer.Align(16);
                 baseOff = writer.Tell();
             }
+            else
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.Write((long)0);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            }
             // CustomizeItems
             if (CustomizeItemTable.CustomizeItems.Count() != 0)
             {
@@ -1170,6 +1324,13 @@ namespace FirstLib.FirstRead
                 CustomizeItemTable.Write(writer, (int)dataPos);
                 writer.Align(16);
                 baseOff = writer.Tell();
+            }
+            else
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.Write((long)0);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
             }
             // Sub04
             if (Sub04.Sub00s.Count() != 0)
@@ -1182,6 +1343,13 @@ namespace FirstLib.FirstRead
                 writer.Align(16);
                 baseOff = writer.Tell();
             }
+            else
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.Write((long)0);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            }
             // PvTable
             if (PvTable.PvDataTable.Count() != 0 || PvTable.PvInfoTable.Count() != 0 || PvTable.PvSabiTable.Count() != 0)
             {
@@ -1193,6 +1361,13 @@ namespace FirstLib.FirstRead
                 writer.Align(16);
                 baseOff = writer.Tell();
             }
+            else
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.Write((long)0);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            }
             // StageTable
             if (StageTable.Stages.Count() != 0)
             {
@@ -1203,6 +1378,13 @@ namespace FirstLib.FirstRead
                 StageTable.Write(writer, (int)dataPos);
                 writer.Align(16);
                 baseOff = writer.Tell();
+            }
+            else
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.Write((long)0);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
             }
             // SetBonusTable
             if (SetBonusTable.SetBonuses.Count() != 0)
@@ -1216,6 +1398,176 @@ namespace FirstLib.FirstRead
                 writer.Align(16);
                 baseOff = writer.Tell();
             }
+            else
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.Write((long)0);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            }
+            //long sub08Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub09Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub10Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub11Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            //long sub12Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub13Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub14Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub15Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub16Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub17Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub18Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub19Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub20Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            //long sub21Offset = reader.ReadInt64();
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // ModuleUnlockOverrideTable
+            if (ModuleUnlockOverrideTable.UnlockOverrides.Count() != 0)
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.WriteOffset(baseOff - dataPos, dataPos);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
+                ModuleUnlockOverrideTable.Write(writer, (int)dataPos);
+                writer.Seek(0, SeekOrigin.End);
+                writer.Align(16);
+                baseOff = writer.Tell();
+            }
+            else
+            {
+                writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+                writer.Write((long)0);
+                offsetsStart += 8;
+                writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            }
+            // 23
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 24
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 25
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 26
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 27
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 28
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 29 
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 30
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 31
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 32
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 33
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 34
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 35
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 36
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
+            // 37
+            writer.Seek((int)offsetsStart, SeekOrigin.Begin);
+            writer.Write((long)0);
+            offsetsStart += 8;
+            writer.Seek((int)(baseOff), SeekOrigin.Begin);
 
             // end of file
             long dataEnd = writer.Tell();
@@ -1239,6 +1591,7 @@ namespace FirstLib.FirstRead
             PvTable = new PvTable();
             StageTable = new StageTable();
             SetBonusTable = new SetBonusTable();
+            ModuleUnlockOverrideTable = new ModuleUnlockOverrideTable();
         }
     }
 }
