@@ -32,7 +32,7 @@ namespace FirstWrite
             {
                 ModuleID.Text = ModuleTable.Modules[ModuleInfos.SelectedIndex].ModuleID.ToString();
                 CostumeID.Text = ModuleTable.Modules[ModuleInfos.SelectedIndex].CosID.ToString();
-                U04.Text = ModuleTable.Modules[ModuleInfos.SelectedIndex].U04.ToString();
+                SortIndex.Text = ModuleTable.Modules[ModuleInfos.SelectedIndex].SortIndex.ToString();
                 U06.Text = ModuleTable.Modules[ModuleInfos.SelectedIndex].U06.ToString();
                 Effect.Text = ModuleTable.Modules[ModuleInfos.SelectedIndex].Effect.ToString();
                 Cloud.Text = ModuleTable.Modules[ModuleInfos.SelectedIndex].Cloud.ToString();
@@ -72,9 +72,9 @@ namespace FirstWrite
         {
             if (ModuleInfos.SelectedIndex != -1)
             {
-                if (short.TryParse(U04.Text, out short value))
+                if (short.TryParse(SortIndex.Text, out short value))
                 {
-                    ModuleTable.Modules[ModuleInfos.SelectedIndex].U04 = value;
+                    ModuleTable.Modules[ModuleInfos.SelectedIndex].SortIndex = value;
                 }
             }
         }

@@ -44,6 +44,11 @@ namespace FirstWrite
             if (ModuleUnlockOverrides.SelectedIndex != -1 && Flags.SelectedIndex != -1)
             {
                 Flag.Text = ModuleUnlockOverrideTable.UnlockOverrides[ModuleUnlockOverrides.SelectedIndex].OverrideFlags[Flags.SelectedIndex].Unlocked.ToString();
+                Unks.Items.Clear();
+                foreach (var exflag in ModuleUnlockOverrideTable.UnlockOverrides[ModuleUnlockOverrides.SelectedIndex].OverrideFlags[Flags.SelectedIndex].Unks)
+                {
+                    Unks.Items.Add(exflag.ToString());
+                }
             }
         }
 
@@ -62,7 +67,6 @@ namespace FirstWrite
         private void AddFlagButton_Click(object sender, EventArgs e)
         {
             ModuleUnlockOverrideDataSub flag = new ModuleUnlockOverrideDataSub();
-            flag.Unk02 = 0;
             ModuleUnlockOverrideTable.UnlockOverrides[ModuleUnlockOverrides.SelectedIndex].OverrideFlags.Add(flag);
             Flags.Items.Add($"{flag.Unlocked}");
         }
@@ -101,6 +105,42 @@ namespace FirstWrite
                     ModuleUnlockOverrideTable.UnlockOverrides[ModuleUnlockOverrides.SelectedIndex].ModuleID = value;
                     ModuleUnlockOverrides.Items[ModuleUnlockOverrides.SelectedIndex] = $"Module {value}";
                 }
+            }
+        }
+
+        private void Unks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ModuleUnlockOverrides.SelectedIndex != -1 && Flags.SelectedIndex != -1)
+            {
+                Unks.Text = ModuleUnlockOverrideTable.UnlockOverrides[ModuleUnlockOverrides.SelectedIndex].OverrideFlags[Flags.SelectedIndex].Unks[Unks.SelectedIndex].ToString();
+            }
+        }
+
+        private void UnkValue_TextChanged(object sender, EventArgs e)
+        {
+            if (ModuleUnlockOverrides.SelectedIndex != -1 && Flags.SelectedIndex != -1 && Unks.SelectedIndex != -1)
+            {
+                if (int.TryParse(UnkValue.Text, out int value))
+                {
+                    ModuleUnlockOverrideTable.UnlockOverrides[ModuleUnlockOverrides.SelectedIndex].OverrideFlags[Flags.SelectedIndex].Unks[Unks.SelectedIndex] = value;
+                }            }
+        }
+
+        private void RemoveExFlagButton_Click(object sender, EventArgs e)
+        {
+            if (ModuleUnlockOverrides.SelectedIndex != -1 && Flags.SelectedIndex != -1 && Unks.SelectedIndex != -1)
+            {
+                ModuleUnlockOverrideTable.UnlockOverrides[ModuleUnlockOverrides.SelectedIndex].OverrideFlags[Flags.SelectedIndex].Unks.RemoveAt(Unks.SelectedIndex);
+                Unks.Items.RemoveAt(Unks.SelectedIndex);
+            }
+        }
+
+        private void AddExFlagButton_Click(object sender, EventArgs e)
+        {
+            if (ModuleUnlockOverrides.SelectedIndex != -1 && Flags.SelectedIndex != -1)
+            {
+                ModuleUnlockOverrideTable.UnlockOverrides[ModuleUnlockOverrides.SelectedIndex].OverrideFlags[Flags.SelectedIndex].Unks.Add(0);
+                Unks.Items.Add(0);
             }
         }
     }

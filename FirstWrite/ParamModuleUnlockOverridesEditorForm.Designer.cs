@@ -40,6 +40,11 @@
             this.Flag = new System.Windows.Forms.TextBox();
             this.ModuleIDLabel = new System.Windows.Forms.Label();
             this.ModuleID = new System.Windows.Forms.TextBox();
+            this.Unks = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.UnkValue = new System.Windows.Forms.TextBox();
+            this.AddExFlagButton = new System.Windows.Forms.Button();
+            this.RemoveExFlagButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ModuleUnlockOverrides
@@ -154,11 +159,63 @@
             this.ModuleID.TabIndex = 7;
             this.ModuleID.TextChanged += new System.EventHandler(this.ModuleID_TextChanged);
             // 
+            // Unks
+            // 
+            this.Unks.FormattingEnabled = true;
+            this.Unks.ItemHeight = 12;
+            this.Unks.Location = new System.Drawing.Point(297, 122);
+            this.Unks.Name = "Unks";
+            this.Unks.Size = new System.Drawing.Size(100, 88);
+            this.Unks.TabIndex = 8;
+            this.Unks.SelectedIndexChanged += new System.EventHandler(this.Unks_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(297, 107);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(31, 12);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Unks";
+            // 
+            // UnkValue
+            // 
+            this.UnkValue.Location = new System.Drawing.Point(297, 216);
+            this.UnkValue.Name = "UnkValue";
+            this.UnkValue.Size = new System.Drawing.Size(100, 19);
+            this.UnkValue.TabIndex = 10;
+            this.UnkValue.TextChanged += new System.EventHandler(this.UnkValue_TextChanged);
+            // 
+            // AddExFlagButton
+            // 
+            this.AddExFlagButton.Location = new System.Drawing.Point(297, 242);
+            this.AddExFlagButton.Name = "AddExFlagButton";
+            this.AddExFlagButton.Size = new System.Drawing.Size(100, 23);
+            this.AddExFlagButton.TabIndex = 11;
+            this.AddExFlagButton.Text = "Add";
+            this.AddExFlagButton.UseVisualStyleBackColor = true;
+            this.AddExFlagButton.Click += new System.EventHandler(this.AddExFlagButton_Click);
+            // 
+            // RemoveExFlagButton
+            // 
+            this.RemoveExFlagButton.Location = new System.Drawing.Point(297, 271);
+            this.RemoveExFlagButton.Name = "RemoveExFlagButton";
+            this.RemoveExFlagButton.Size = new System.Drawing.Size(100, 23);
+            this.RemoveExFlagButton.TabIndex = 11;
+            this.RemoveExFlagButton.Text = "Remove";
+            this.RemoveExFlagButton.UseVisualStyleBackColor = true;
+            this.RemoveExFlagButton.Click += new System.EventHandler(this.RemoveExFlagButton_Click);
+            // 
             // ParamModuleUnlockOverridesEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 424);
+            this.Controls.Add(this.RemoveExFlagButton);
+            this.Controls.Add(this.AddExFlagButton);
+            this.Controls.Add(this.UnkValue);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.Unks);
             this.Controls.Add(this.ModuleID);
             this.Controls.Add(this.ModuleIDLabel);
             this.Controls.Add(this.Flag);
@@ -192,5 +249,10 @@
         private System.Windows.Forms.TextBox Flag;
         private System.Windows.Forms.Label ModuleIDLabel;
         private System.Windows.Forms.TextBox ModuleID;
+        private System.Windows.Forms.ListBox Unks;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox UnkValue;
+        private System.Windows.Forms.Button AddExFlagButton;
+        private System.Windows.Forms.Button RemoveExFlagButton;
     }
 }

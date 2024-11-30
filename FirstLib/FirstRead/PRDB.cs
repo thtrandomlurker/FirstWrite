@@ -102,7 +102,7 @@ namespace FirstLib.FirstRead
     {
         public short ModuleID;
         public short CosID;
-        public short U04;
+        public short SortIndex;
         public short U06;
         public EffectType Effect;
         public CloudType Cloud;
@@ -118,7 +118,7 @@ namespace FirstLib.FirstRead
         {
             ModuleID = reader.ReadInt16();
             CosID = reader.ReadInt16();
-            U04 = reader.ReadInt16();
+            SortIndex = reader.ReadInt16();
             U06 = reader.ReadInt16();
             Effect = (EffectType)reader.ReadInt16();
             Cloud = (CloudType)reader.ReadByte();
@@ -134,7 +134,7 @@ namespace FirstLib.FirstRead
         {
             writer.Write(ModuleID);
             writer.Write(CosID);
-            writer.Write(U04);
+            writer.Write(SortIndex);
             writer.Write(U06);
             writer.Write((short)Effect);
             writer.Write((byte)Cloud);
@@ -1001,22 +1001,49 @@ namespace FirstLib.FirstRead
     public class ModuleUnlockOverrideDataSub
     {
         public byte Unlocked;
-        public byte Unk02;
+        public List<int> Unks;
 
         public void Read(XReader reader)
         {
             Unlocked = reader.ReadByte();
-            Unk02 = reader.ReadByte();
+            byte unkCount = reader.ReadByte();
             reader.Seek(6, XSeekOrigin.Current);
-            reader.Seek(8, XSeekOrigin.Current);
+            long offset = reader.ReadInt64();
+            reader.ReadAtOffset((int)offset, () =>
+            {
+                for (int i = 0; i < unkCount; i++)
+                {
+                    Unks.Add(reader.ReadInt32());
+                }
+            });
         }
 
-        public void Write(XWriter writer, int basePos)
+        public int Write(XWriter writer, int exFlagsPos, int basePos)
         {
             writer.Write(Unlocked);
-            writer.Write(Unk02);
+            writer.Write((byte)Unks.Count());
             writer.WriteNulls(6);
-            writer.Write((long)0);
+            if (Unks.Count() != 0)
+            {
+                writer.WriteOffset(exFlagsPos - basePos, basePos);
+                long pre = writer.Tell();
+                writer.Seek(exFlagsPos, SeekOrigin.Begin);
+                foreach (var flag in Unks)
+                {
+                    writer.Write(flag);
+                }
+                writer.Seek((int)pre, SeekOrigin.Begin);
+            }
+            else
+            {
+                writer.Write((long)0);
+            }
+            return exFlagsPos + (4 * Unks.Count());
+        }
+
+        public ModuleUnlockOverrideDataSub()
+        {
+            Unks = new List<int>();
         }
 
     }
@@ -1043,10 +1070,11 @@ namespace FirstLib.FirstRead
                 }
             });
         }
-        
-        public int Write(XWriter writer, int flagsPos, int basePos)
+         
+        public int[] Write(XWriter writer, int flagsPos, int exFlagsPos, int basePos)
         {
             int tmpFlagsPos = flagsPos;
+            int tmpExFlagsPos = exFlagsPos;
             writer.Write(ModuleID);
             writer.Write((byte)OverrideFlags.Count());
             writer.WriteNulls(3);
@@ -1057,7 +1085,7 @@ namespace FirstLib.FirstRead
                 writer.Seek(tmpFlagsPos, SeekOrigin.Begin);
                 foreach (var flag in OverrideFlags)
                 {
-                    flag.Write(writer, basePos);
+                    tmpExFlagsPos = flag.Write(writer, exFlagsPos, basePos);
                 }
                 writer.Align(16);
                 tmpFlagsPos = (int)writer.Tell();
@@ -1065,7 +1093,7 @@ namespace FirstLib.FirstRead
             }
             else
                 writer.Write((long)0);
-            return tmpFlagsPos;
+            return new int[] { tmpFlagsPos, tmpExFlagsPos };
         }
 
         public ModuleUnlockOverrideData()
@@ -1104,9 +1132,17 @@ namespace FirstLib.FirstRead
             writer.Write((short)UnlockOverrides.Count());
             writer.Align(16);
             int flagsPos = (int)writer.Tell() + (0x10 * UnlockOverrides.Count());
+            int numFlags = 0;
+            foreach (var unlock in UnlockOverrides)
+            {
+                numFlags += unlock.OverrideFlags.Count();
+            }
+            int exFlagsPos = (int)writer.Tell() + (0x10 * UnlockOverrides.Count()) + (0x10 * numFlags);
             foreach (var moduleOverride in UnlockOverrides)
             {
-                flagsPos = moduleOverride.Write(writer, flagsPos, basePos);
+                int[] tmpRes = moduleOverride.Write(writer, flagsPos, exFlagsPos, basePos);
+                flagsPos = tmpRes[0];
+                exFlagsPos = tmpRes[1];
             }
         }
 

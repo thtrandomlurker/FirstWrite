@@ -36,8 +36,8 @@
             this.ModuleID = new System.Windows.Forms.TextBox();
             this.CostumeIDLabel = new System.Windows.Forms.Label();
             this.CostumeID = new System.Windows.Forms.TextBox();
-            this.U04 = new System.Windows.Forms.TextBox();
-            this.U04Label = new System.Windows.Forms.Label();
+            this.SortIndex = new System.Windows.Forms.TextBox();
+            this.SortIndexLabel = new System.Windows.Forms.Label();
             this.U06 = new System.Windows.Forms.TextBox();
             this.U06Label = new System.Windows.Forms.Label();
             this.Effect = new System.Windows.Forms.ComboBox();
@@ -133,23 +133,23 @@
             this.CostumeID.TabIndex = 4;
             this.CostumeID.TextChanged += new System.EventHandler(this.CostumeID_TextChanged);
             // 
-            // U04
+            // SortIndex
             // 
-            this.U04.Location = new System.Drawing.Point(142, 119);
-            this.U04.MaxLength = 4;
-            this.U04.Name = "U04";
-            this.U04.Size = new System.Drawing.Size(100, 19);
-            this.U04.TabIndex = 4;
-            this.U04.TextChanged += new System.EventHandler(this.U04_TextChanged);
+            this.SortIndex.Location = new System.Drawing.Point(142, 119);
+            this.SortIndex.MaxLength = 4;
+            this.SortIndex.Name = "SortIndex";
+            this.SortIndex.Size = new System.Drawing.Size(100, 19);
+            this.SortIndex.TabIndex = 4;
+            this.SortIndex.TextChanged += new System.EventHandler(this.U04_TextChanged);
             // 
-            // U04Label
+            // SortIndexLabel
             // 
-            this.U04Label.AutoSize = true;
-            this.U04Label.Location = new System.Drawing.Point(142, 104);
-            this.U04Label.Name = "U04Label";
-            this.U04Label.Size = new System.Drawing.Size(25, 12);
-            this.U04Label.TabIndex = 5;
-            this.U04Label.Text = "U04";
+            this.SortIndexLabel.AutoSize = true;
+            this.SortIndexLabel.Location = new System.Drawing.Point(142, 104);
+            this.SortIndexLabel.Name = "SortIndexLabel";
+            this.SortIndexLabel.Size = new System.Drawing.Size(57, 12);
+            this.SortIndexLabel.TabIndex = 5;
+            this.SortIndexLabel.Text = "Sort Index";
             // 
             // U06
             // 
@@ -440,8 +440,8 @@
             this.Controls.Add(this.EffectLabel);
             this.Controls.Add(this.U06Label);
             this.Controls.Add(this.U06);
-            this.Controls.Add(this.U04Label);
-            this.Controls.Add(this.U04);
+            this.Controls.Add(this.SortIndexLabel);
+            this.Controls.Add(this.SortIndex);
             this.Controls.Add(this.CostumeIDLabel);
             this.Controls.Add(this.CostumeID);
             this.Controls.Add(this.U10);
@@ -476,8 +476,8 @@
         private System.Windows.Forms.TextBox ModuleID;
         private System.Windows.Forms.Label CostumeIDLabel;
         private System.Windows.Forms.TextBox CostumeID;
-        private System.Windows.Forms.TextBox U04;
-        private System.Windows.Forms.Label U04Label;
+        private System.Windows.Forms.TextBox SortIndex;
+        private System.Windows.Forms.Label SortIndexLabel;
         private System.Windows.Forms.TextBox U06;
         private System.Windows.Forms.Label U06Label;
         private System.Windows.Forms.ComboBox Effect;
