@@ -280,16 +280,16 @@ namespace FirstLib.FirstRead
 
     public class CustomizeItemInfo
     {
-        short ItemID;
-        short ItemNumber;
-        short U04;
-        short U06;
-        PartType Part;
-        CloudType Cloud;
-        byte U0A;
-        byte U0B;
-        int U0C;
-        long ItemSetAttributes;
+        public short ItemID;
+        public short ItemNumber;
+        public short U04;
+        public short U06;
+        public PartType Part;
+        public CloudType Cloud;
+        public byte U0A;
+        public byte U0B;
+        public int U0C;
+        public long ItemSetAttributes;
 
         public void Read(XReader reader)
         {
